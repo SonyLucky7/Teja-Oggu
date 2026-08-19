@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-background: #030014;
+  --color-background-secondary: #0a0a0f;
+  --color-surface: rgba(255, 255, 255, 0.03);
+  --color-foreground: #FFFFFF;
+  --color-muted: #94A3B8;
+  --color-purple: #A855F7;
+  --color-indigo: #6366F1;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --font-heading: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: #030014;
+  color: #FFFFFF;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: #FFFFFF;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #030014;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
+
+.text-gradient-purple {
+  @apply bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent;
+}
+
+.text-gradient-white {
+  @apply bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent;
+}
+
+.glass-card {
+  @apply bg-[#030014]/60 border border-white/10 backdrop-blur-xl hover:border-purple-500/30 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)];
+}
+
+.btn-gradient {
+  @apply bg-gradient-to-r from-[#6366f1] to-[#a855f7] hover:from-[#5558e6] hover:to-[#9945e8] text-white shadow-[0_0_20px_rgba(99,102,241,0.4)];
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
