@@ -1,150 +1,109 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { HeartPulse, TrendingUp, Gamepad2, MapPin, Calendar, Code2 } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 export default function About() {
-  const stats = [
-    {
-      title: 'DISCIPLINE & HEALTHCARE',
-      value: '3 Years',
-      subtitle: 'Pharmacy Experience',
-      desc: 'Strong work ethic, attention to detail, precision',
-      icon: <HeartPulse className="w-6 h-6 text-purple-400" />,
-    },
-    {
-      title: 'MARKET INTELLIGENCE',
-      value: '5+ Years',
-      subtitle: 'Trading & Financial Analysis',
-      desc: 'Risk management, price action, quantitative thinking',
-      icon: <TrendingUp className="w-6 h-6 text-blue-400" />,
-    },
-    {
-      title: 'TACTICAL STRATEGY',
-      value: '6+ Years',
-      subtitle: 'Gaming & Esports (HAC)',
-      desc: 'UID: 55604445176 • 5-Finger Claw + Full Gyroscope',
-      icon: <Gamepad2 className="w-6 h-6 text-indigo-400" />,
-    },
-  ];
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
 
   return (
-    <section id="About" className="py-24 md:py-32 px-6 md:px-12 lg:px-16 relative">
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[500px] bg-purple-500/20 blur-[128px] rounded-full pointer-events-none" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-5xl font-bold text-center mx-auto text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7] mb-4">
-            About Me
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Transforming complex challenges into scalable, elegant digital solutions.
-          </p>
-        </motion.div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {stats.map((stat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="bg-[#030014]/50 border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:border-purple-500/30 transition-all group"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 rounded-lg bg-white/5 border border-white/10 group-hover:border-purple-500/30 transition-colors">
-                  {stat.icon}
-                </div>
-                <div>
-                  <div className="text-xs font-semibold tracking-wider text-purple-400/80 mb-1">
-                    {stat.title}
-                  </div>
-                  <div className="text-2xl font-bold text-white">
-                    {stat.value}
-                  </div>
-                </div>
-              </div>
-              <div className="text-sm font-medium text-gray-300 mb-2">
-                {stat.subtitle}
-              </div>
-              <div className="text-xs text-gray-500">
-                {stat.desc}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Main Bio Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-[#030014]/60 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-xl relative overflow-hidden mt-12"
-        >
-          {/* Internal ambient glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[64px] rounded-full pointer-events-none" />
+    <section id="about" className="py-24 md:py-32 border-b border-black/15 bg-white">
+      <div className="container mx-auto px-4 md:px-6" ref={containerRef}>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
-            <div className="space-y-6 text-gray-300 leading-relaxed">
-              <p>
-                Hello! I&apos;m <strong className="text-white">Teja Oggu</strong>, a 21-year-old Full-Stack Developer based in Hyderabad, India. 
-                My journey into tech is unconventional—spanning healthcare, financial trading, and competitive gaming. 
-                This diverse background has shaped my approach to software engineering: combining the precision of pharmacy, 
-                the analytical rigor of market trading, and the tactical execution of esports.
-              </p>
-              <p>
-                Today, I specialize in crafting scalable SaaS products, intelligent CRM systems, and AI-powered applications. 
-                Whether it&apos;s integrating complex APIs, architecting backend services, or building fluid, modern user interfaces, 
-                I thrive on solving difficult problems and turning abstract ideas into robust digital realities.
-              </p>
-            </div>
+          {/* Header */}
+          <div className="md:col-span-4">
+            <h2 className="text-6xl md:text-7xl font-black uppercase tracking-tighter font-heading sticky top-32">
+              The<br />
+              <span className="text-black/30">Mindset</span>
+            </h2>
+          </div>
+
+          {/* Content */}
+          <div className="md:col-span-8 flex flex-col gap-12">
             
-            <div className="flex flex-col justify-center gap-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center gap-3">
-                  <div className="text-purple-400"><Code2 className="w-5 h-5" /></div>
-                  <div>
-                    <div className="text-xs text-gray-500">Name</div>
-                    <div className="text-sm font-semibold text-gray-200">Teja Oggu</div>
-                  </div>
-                </div>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center gap-3">
-                  <div className="text-blue-400"><Calendar className="w-5 h-5" /></div>
-                  <div>
-                    <div className="text-xs text-gray-500">Age / DOB</div>
-                    <div className="text-sm font-semibold text-gray-200">21 • 01 Jan 2005</div>
-                  </div>
-                </div>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center gap-3">
-                  <div className="text-indigo-400"><MapPin className="w-5 h-5" /></div>
-                  <div>
-                    <div className="text-xs text-gray-500">Location</div>
-                    <div className="text-sm font-semibold text-gray-200">Hyderabad, India</div>
-                  </div>
-                </div>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center gap-3">
-                  <div className="text-purple-400"><TrendingUp className="w-5 h-5" /></div>
-                  <div>
-                    <div className="text-xs text-gray-500">Focus</div>
-                    <div className="text-sm font-semibold text-gray-200">SaaS • CRM • AI • APIs</div>
-                  </div>
-                </div>
+            <div className="text-2xl md:text-4xl leading-tight font-medium font-heading">
+              <RevealText text="I bridge the gap between complex engineering and rapid execution." inView={isInView} delay={0} />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-black/15">
+              <div className="flex flex-col gap-4">
+                <h3 className="text-lg font-bold uppercase tracking-widest bg-black text-white px-3 py-1 self-start">The Origin</h3>
+                <p className="text-base text-black/80 leading-relaxed font-body">
+                  With 3 years in Pharmacy, 5+ years in Trading, and 6+ years in high-stakes Gaming, 
+                  my background is unconventional. This diverse experience taught me systems thinking, 
+                  pattern recognition, and risk management—skills I apply directly to software architecture.
+                </p>
+              </div>
+              <div className="flex flex-col gap-4">
+                <h3 className="text-lg font-bold uppercase tracking-widest bg-black text-white px-3 py-1 self-start">The Approach</h3>
+                <p className="text-base text-black/80 leading-relaxed font-body">
+                  I don't just write code; I solve business problems. Using AI-augmented workflows, 
+                  I iterate faster without sacrificing robustness. From SaaS architectures to CRM tools, 
+                  I deliver scalable systems built for reality, not just theory.
+                </p>
               </div>
             </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 border-y border-black/15 divide-x divide-y md:divide-y-0 divide-black/15 mt-8">
+              {[
+                { label: 'Gaming (HAC)', value: '6+' },
+                { label: 'Trading', value: '5+' },
+                { label: 'Pharmacy', value: '3+' },
+                { label: 'Development', value: '5+' }
+              ].map((stat, i) => (
+                <div key={i} className="p-6 flex flex-col items-center justify-center text-center">
+                  <div className="text-4xl md:text-5xl font-black font-heading mb-2">{stat.value}</div>
+                  <div className="text-xs uppercase tracking-widest font-bold text-black/50">{stat.label} Years</div>
+                </div>
+              ))}
+            </div>
+
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function RevealText({ text, inView, delay }: { text: string, inView: boolean, delay: number }) {
+  const words = text.split(" ");
+  
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.05, delayChildren: delay * 0.1 }
+    })
+  };
+
+  const child = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring" as const, damping: 12, stiffness: 100 }
+    },
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: { type: "spring" as const, damping: 12, stiffness: 100 }
+    }
+  };
+
+  return (
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      className="flex flex-wrap overflow-hidden"
+    >
+      {words.map((word, index) => (
+        <motion.span variants={child} key={index} className="mr-2 mb-2 inline-block">
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
   );
 }

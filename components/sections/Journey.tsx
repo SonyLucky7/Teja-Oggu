@@ -1,107 +1,94 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Briefcase, Activity, Target, Megaphone, Code, BrainCircuit } from "lucide-react";
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-const milestones = [
+const timeline = [
   {
-    title: "Healthcare & Pharmacy Discipline",
-    description: "3 Years Professional Pharmacy Experience • Precision, compliance & clinical operations",
-    icon: <Activity className="w-6 h-6 text-indigo-400" />,
-    date: "3 Years Discipline",
+    year: "2024",
+    title: "AI & Full-Stack Mastery",
+    desc: "Integrating LLMs, building autonomous agents, and architecting scalable SaaS platforms. Merging rapid prototyping with production-ready systems.",
   },
   {
-    title: "Financial Markets & Quantitative Trading",
-    description: "5+ Years Active Market Practice • Technical price action, risk management & algorithmic strategy",
-    icon: <Target className="w-6 h-6 text-purple-400" />,
-    date: "5+ Years Trading",
+    year: "2021-2023",
+    title: "System Automation",
+    desc: "Developing intelligent CRM tools, data pipelines, and automation scripts. Focused on reducing friction and maximizing efficiency in business logic.",
   },
   {
-    title: "Competitive Gaming & Esports Strategy",
-    description: "Player HAC (UID: 55604445176) • 5-Finger Claw & Full Gyroscope • High-stakes scrims & tournament finals",
-    icon: <BrainCircuit className="w-6 h-6 text-indigo-400" />,
-    date: "6+ Years Strategy",
+    year: "2018-2020",
+    title: "The Pivot",
+    desc: "Transitioning from Pharmacy and Trading into deep tech. Leveraging analytical skills to recognize software patterns and architecture.",
   },
   {
-    title: "Digital Marketing & Growth Systems",
-    description: "Digital Bros Studio • Organic reach, influencer pipeline funnels & conversion architecture",
-    icon: <Megaphone className="w-6 h-6 text-purple-400" />,
-    date: "Digital Bros Studio",
-  },
-  {
-    title: "Full-Stack Software Engineering",
-    description: "Next.js 16, React 19, TypeScript, PostgreSQL, Prisma ORM, Serverless Microservices",
-    icon: <Code className="w-6 h-6 text-indigo-400" />,
-    date: "Production Engineering",
-  },
-  {
-    title: "AI Product Architecture & Systems",
-    description: "Gemini AI Multi-Model Integration, Automated CRMs, Autonomous Agent Workflows & DRM Platforms",
-    icon: <Briefcase className="w-6 h-6 text-purple-400" />,
-    date: "Current Focus & Future",
-  },
+    year: "Pre-2018",
+    title: "The Foundations",
+    desc: "6+ years in highly competitive gaming (HAC). Building the foundational discipline, reaction time, and strategic thinking required for high-level engineering.",
+  }
 ];
 
 export default function Journey() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
   return (
-    <section id="Experience" className="py-24 relative z-10">
-      <div className="container mx-auto px-4 md:px-8 max-w-5xl">
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]"
-          >
-            Experience & Journey
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto"
-          >
-            The evolutionary path that shaped my engineering mindset.
-          </motion.p>
+    <section id="journey" ref={containerRef} className="py-24 md:py-32 bg-[#f5f5f5] border-b border-black/15">
+      <div className="container mx-auto px-4 md:px-6">
+        
+        <div className="mb-16 md:mb-24 flex justify-between items-end border-b-4 border-black pb-4">
+          <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter font-heading">
+            Evolution
+          </h2>
+          <div className="hidden md:block text-xl font-bold font-mono">
+            [ 2018 — 2024 ]
+          </div>
         </div>
 
         <div className="relative">
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-[#6366f1] via-[#a855f7] to-transparent rounded-full opacity-30 hidden md:block"></div>
+          {/* Progress Line */}
+          <div className="absolute left-[27px] md:left-1/2 top-0 bottom-0 w-1 bg-black/10 -translate-x-1/2"></div>
+          <motion.div 
+            className="absolute left-[27px] md:left-1/2 top-0 w-1 bg-black origin-top -translate-x-1/2"
+            style={{ height: "100%", scaleY: scrollYProgress }}
+          ></motion.div>
 
-          <div className="space-y-12 relative">
-            {milestones.map((milestone, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className={`flex flex-col md:flex-row items-center justify-between w-full ${
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                <div className="w-full md:w-5/12 mb-6 md:mb-0 hidden md:block"></div>
-
-                <div className="z-20 flex items-center justify-center w-12 h-12 rounded-full bg-[#030014] border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.3)] mb-6 md:mb-0 relative mx-auto md:mx-0">
-                  {milestone.icon}
-                  <div className="absolute inset-0 rounded-full animate-ping bg-purple-500/20"></div>
-                </div>
-
-                <div className="w-full md:w-5/12">
-                  <div className="bg-[#030014]/50 border border-white/10 backdrop-blur-xl hover:border-purple-500/30 transition-all duration-300 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#6366f1] to-[#a855f7] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <span className="inline-block px-3 py-1 mb-4 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-300 text-xs font-semibold">
-                      {milestone.date}
-                    </span>
-                    <h3 className="text-xl font-bold text-white mb-2">{milestone.title}</h3>
-                    <p className="text-gray-400">{milestone.description}</p>
+          <div className="flex flex-col gap-12 md:gap-0">
+            {timeline.map((item, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div key={index} className="relative flex flex-col md:flex-row items-center justify-between w-full md:h-64">
+                  
+                  {/* Node */}
+                  <div className="absolute left-[27px] md:left-1/2 w-6 h-6 bg-[#f5f5f5] border-4 border-black rounded-full -translate-x-1/2 z-10 top-0 md:top-1/2 md:-translate-y-1/2"></div>
+                  
+                  {/* Content Left */}
+                  <div className={`w-full md:w-5/12 pl-16 md:pl-0 ${isEven ? 'md:text-right md:pr-12' : 'md:order-2 md:pl-12'} pt-2 md:pt-0`}>
+                    <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-4">{item.title}</h3>
+                    <p className="text-base text-black/70 font-medium leading-relaxed">{item.desc}</p>
                   </div>
+
+                  {/* Date Right */}
+                  <div className={`hidden md:block w-5/12 ${isEven ? 'order-2 pl-12' : 'text-right pr-12'}`}>
+                    <span className="text-5xl md:text-7xl font-black font-mono text-black/10 tracking-tighter">
+                      {item.year}
+                    </span>
+                  </div>
+
+                  {/* Mobile Date */}
+                  <div className="md:hidden pl-16 mt-4">
+                    <span className="text-3xl font-black font-mono bg-black text-white px-2 py-1">
+                      {item.year}
+                    </span>
+                  </div>
+
                 </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
+
       </div>
     </section>
   );
