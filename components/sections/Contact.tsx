@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from 'react';
 import { Mail, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
@@ -55,7 +55,7 @@ export default function Contact() {
 
           <div className="relative mb-6">
             <div className="w-32 h-32 md:w-36 md:h-36 rounded-none bg-white border-4 border-black flex items-center justify-center overflow-hidden shadow-[8px_8px_0_0_#000]">
-              <span className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-black">TO</span>
+              <img src="/profile-sketch.jpg" alt="Profile" className="w-full h-full object-cover grayscale" />
             </div>
           </div>
           
