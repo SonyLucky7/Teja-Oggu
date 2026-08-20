@@ -35,9 +35,9 @@ const journeySteps = [
   },
   {
     year: "3 Years",
-    title: "Pharmacy Background",
-    org: "Medical Field",
-    desc: "Learned strict compliance, attention to detail, and methodical problem solving. A solid foundation for writing secure, bug-free software.",
+    title: "Pharmacy Operations",
+    org: "Medical Agency & Pharmacy",
+    desc: "Gained hands-on experience deciphering complex prescriptions and deeply understanding pharmacological use-cases. Cultivated extreme attention to detail and methodical problem-solving—a foundation that now translates directly into writing precise, secure software.",
     icon: <HeartPulse className="w-6 h-6 text-black" />,
   }
 ];
