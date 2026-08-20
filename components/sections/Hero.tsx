@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import Starfield from '@/components/visuals/Starfield';
 
 const roles = [
   "AI-Augmented Full-Stack Developer.",
@@ -78,6 +79,7 @@ export default function Hero() {
       ref={containerRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#080808] text-white"
     >
+      <Starfield />
       <motion.div 
         style={{ y: y1, opacity }}
         className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center text-center"
