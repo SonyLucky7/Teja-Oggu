@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -13,10 +13,10 @@ const journeySteps = [
     icon: <Briefcase className="w-6 h-6 text-black" />,
   },
   {
-    year: "2024",
-    title: "Digital Marketing & Automation",
-    org: "Digital Bros Studio",
-    desc: "Spearheaded digital strategy, Meta/Google Ads, and WhatsApp/Instagram automation. Delivered comprehensive technology-based business solutions.",
+    year: "Present",
+    title: "Digital Marketing",
+    org: "Co-Founder @ Digital Bros Studio",
+    desc: "Co-founded the startup to spearhead digital strategy, Meta/Google Ads, and WhatsApp/Instagram automation. Delivering comprehensive technology-based business solutions.",
     icon: <Briefcase className="w-6 h-6 text-black" />,
   },
   {
