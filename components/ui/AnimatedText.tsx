@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { cn } from '@/lib/utils';
 
 interface AnimatedTextProps {
   text: string;
@@ -43,11 +42,11 @@ export default function AnimatedText({
   };
 
   if (prefersReducedMotion) {
-    return <Component className={className}>{text}</Component>;
+    const Tag = Component as any;
+    return <Tag className={className}>{text}</Tag>;
   }
 
-  // @ts-expect-error - Framer Motion types for dynamic components can be overly strict
-  const MotionComponent = motion.create ? motion.create(Component) : motion(Component);
+  const MotionComponent = motion(Component as any);
 
   return (
     <MotionComponent
