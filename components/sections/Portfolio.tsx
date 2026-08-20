@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 const projects = [
   {
@@ -79,9 +79,9 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <div className="mt-16 md:mt-24 flex flex-col gap-24">
+        <div className="mt-16 md:mt-24 relative">
           {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} isInView={isInView} />
+            <ProjectCard key={project.id} project={project} index={index} total={projects.length} />
           ))}
         </div>
 
@@ -90,55 +90,67 @@ export default function Portfolio() {
   );
 }
 
-function ProjectCard({ project, index, isInView }: any) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.7, delay: index * 0.1 }}
-      className="w-full relative"
-    >
-      <div 
-        className="w-full border-2 border-black bg-[#EBEBEB] flex flex-col justify-between p-6 md:p-10 shadow-[8px_8px_0_0_#000] hover:shadow-[16px_16px_0_0_#000] transition-shadow duration-300 group"
-      >
-        <div className="flex justify-between items-start border-b border-black/20 pb-6">
-          <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black w-2/3">
-            {project.title}
-          </h3>
-        </div>
-        
-        <div className="flex-grow flex items-center justify-center w-full relative my-8 min-h-[300px] md:min-h-[500px]">
-          {project.image ? (
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="relative w-full h-full block border-2 border-black overflow-hidden group/img cursor-pointer">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-full object-cover object-top filter grayscale-[20%] group-hover/img:grayscale-0 transition-all duration-500 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                <span className="bg-black text-white px-8 py-3 font-bold uppercase tracking-widest text-sm opacity-0 group-hover/img:opacity-100 transform translate-y-4 group-hover/img:translate-y-0 transition-all duration-300">
-                  Visit Live Site
-                </span>
-              </div>
-            </a>
-          ) : (
-            <div className="text-black/20 font-black text-4xl uppercase tracking-widest">[ PROJECT VISUAL ]</div>
-          )}
-        </div>
+function ProjectCard({ project, index, total }: { project: any, index: number, total: number }) {
+  const cardRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "start start"]
+  });
 
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center pt-6 border-t border-black/20 gap-4">
-          <div className="flex flex-wrap gap-2">
-            {project.services.map((service: string, i: number) => (
-              <span key={i} className="text-xs font-bold uppercase tracking-widest border border-black text-black px-3 py-1">
-                {service}
-              </span>
-            ))}
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  
+  return (
+    <div 
+      className="sticky top-32 mb-12 md:mb-24 flex items-center justify-center w-full"
+      style={{ zIndex: index, top: `calc(100px + ${index * 30}px)` }}
+    >
+      <motion.div 
+        ref={cardRef}
+        style={{ scale }}
+        className="w-full relative"
+      >
+        <div 
+          className="w-full border-2 border-black bg-[#EBEBEB] flex flex-col justify-between p-6 md:p-10 shadow-[8px_8px_0_0_#000] hover:shadow-[16px_16px_0_0_#000] transition-shadow duration-300 group"
+        >
+          <div className="flex justify-between items-start border-b border-black/20 pb-6">
+            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-black w-2/3">
+              {project.title}
+            </h3>
           </div>
-          <span className="text-sm font-bold uppercase tracking-widest text-black">
-            CLIENT: {project.client}
-          </span>
+          
+          <div className="flex-grow flex items-center justify-center w-full relative my-8 min-h-[300px] md:min-h-[500px]">
+            {project.image ? (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="relative w-full h-full block border-2 border-black overflow-hidden group/img cursor-pointer">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover object-top filter grayscale-[20%] group-hover/img:grayscale-0 transition-all duration-500 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                  <span className="bg-black text-white px-8 py-3 font-bold uppercase tracking-widest text-sm opacity-0 group-hover/img:opacity-100 transform translate-y-4 group-hover/img:translate-y-0 transition-all duration-300">
+                    Visit Live Site
+                  </span>
+                </div>
+              </a>
+            ) : (
+              <div className="text-black/20 font-black text-4xl uppercase tracking-widest">[ PROJECT VISUAL ]</div>
+            )}
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center pt-6 border-t border-black/20 gap-4">
+            <div className="flex flex-wrap gap-2">
+              {project.services.map((service: string, i: number) => (
+                <span key={i} className="text-xs font-bold uppercase tracking-widest border border-black text-black px-3 py-1 bg-white">
+                  {service}
+                </span>
+              ))}
+            </div>
+            <span className="text-sm font-bold uppercase tracking-widest text-black bg-white px-3 py-1 border border-black">
+              CLIENT: {project.client}
+            </span>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
