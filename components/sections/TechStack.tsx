@@ -1,71 +1,55 @@
-"use client";
+﻿"use client";
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const skills = [
-  {
-    category: "Frontend & UI",
-    items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "UI/UX Implementation"]
-  },
-  {
-    category: "Backend & Architecture",
-    items: ["Node.js", "Next.js Server Actions", "REST APIs", "Serverless APIs", "PostgreSQL", "Prisma ORM", "Aiven"]
-  },
-  {
-    category: "AI & Automation",
-    items: ["Google Gemini AI", "Multi-Model AI Integration", "Prompt Engineering", "OpenAI / Claude / Grok Concepts", "AI Content Workflows"]
-  },
-  {
-    category: "APIs & Integrations",
-    items: ["Google Gmail API", "Meta Graph API", "WhatsApp Business API", "Razorpay", "Discord / Telegram", "OAuth"]
-  },
-  {
-    category: "Security & Auth",
-    items: ["NextAuth", "JWT & TOTP", "HMAC-SHA256", "Secure Cookies", "Rate Limiting", "CSP & HSTS", "Hardware ID Security"]
-  }
+  { category: "Frontend", items: ["React.js", "Next.js", "Tailwind CSS", "Redux", "Framer Motion", "TypeScript"] },
+  { category: "Backend", items: ["Node.js", "Express.js", "MongoDB", "PostgreSQL", "Prisma ORM", "Firebase"] },
+  { category: "AI & APIs", items: ["OpenAI API", "Gemini API", "Stripe Integration", "REST APIs", "GraphQL"] },
+  { category: "Security", items: ["Clerk Auth", "NextAuth", "JWT", "OAuth", "Role-Based Access"] },
+  { category: "Marketing", items: ["Meta Ads", "Google Ads", "WhatsApp Auto", "Lead Gen", "SEO"] },
+  { category: "Design", items: ["Figma", "UI/UX", "Graphic Design", "Video Editing"] },
 ];
 
 export default function TechStack() {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
   return (
-    <section id="stack" className="py-24 md:py-32 bg-[#0A0A0A] text-white border-y border-white/10" ref={containerRef}>
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10">
+      <div className="container mx-auto px-4 md:px-8 max-w-6xl" ref={containerRef}>
         
-        <div className="mb-16">
-          <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter font-heading text-white">
-            The<br />Stack
-          </h2>
-          <p className="text-xl md:text-2xl mt-4 font-medium max-w-2xl text-white/70">
-            A comprehensive arsenal of modern web technologies, AI models, and robust backend systems.
-          </p>
-        </div>
+        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-16 font-heading">
+          Technical <span className="text-black/30">Arsenal</span>
+        </h2>
 
-        <div className="grid grid-cols-1 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-x-16 md:gap-y-20">
           {skills.map((skillGroup, index) => (
             <motion.div 
-              key={skillGroup.category}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col md:flex-row md:items-start gap-6 md:gap-12 pb-12 border-b border-white/10 last:border-0"
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex flex-col gap-6"
             >
-              <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-tighter w-full md:w-1/3 text-white/80 shrink-0">
-                {skillGroup.category}
-              </h3>
-              
-              <div className="flex flex-wrap gap-3 w-full md:w-2/3">
-                {skillGroup.items.map((item) => (
-                  <span 
-                    key={item} 
-                    className="px-5 py-3 rounded-full border border-white/20 bg-white/5 text-sm md:text-base font-medium font-mono hover:bg-white hover:text-black transition-colors"
-                  >
-                    {item}
-                  </span>
-                ))}
+              <div className="flex items-center gap-4 border-b border-black/20 pb-4">
+                <span className="font-mono text-xs font-bold text-black bg-[#EAEAEA] px-2 py-1">
+                  0{index + 1}
+                </span>
+                <h3 className="text-xl font-bold uppercase tracking-widest text-black">
+                  {skillGroup.category}
+                </h3>
               </div>
+              
+              <ul className="flex flex-col gap-3">
+                {skillGroup.items.map((item, i) => (
+                  <li key={i} className="text-black/70 font-mono text-sm tracking-wide flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 bg-black"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>

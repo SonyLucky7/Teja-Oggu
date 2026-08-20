@@ -1,132 +1,64 @@
-"use client";
+﻿"use client";
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Briefcase, Gamepad2, HeartPulse, LineChart } from 'lucide-react';
 
 const journeySteps = [
   {
-    year: "Current",
+    year: "Present",
     title: "Full-Stack & AI Developer",
-    org: "Independent Developer",
-    desc: "Building SaaS platforms, AI-powered applications, and complete digital products from idea to deployment."
+    org: "Freelance / Independent",
+    desc: "Building SaaS platforms, CRM systems, and AI-integrated web applications. Focusing on modern architectures (Next.js, Tailwind, Prisma) and complex API integrations.",
+    icon: <Briefcase className="w-6 h-6 text-black" />,
   },
   {
     year: "2024",
-    title: "Digital Bros Studio",
-    org: "Marketing & Tech Initiative",
-    desc: "Bridging creative excellence and business results through Meta Ads, social media strategy, and digital solutions."
+    title: "Digital Marketing & Automation",
+    org: "Digital Bros Studio",
+    desc: "Spearheaded digital strategy, Meta/Google Ads, and WhatsApp/Instagram automation. Delivered comprehensive technology-based business solutions.",
+    icon: <Briefcase className="w-6 h-6 text-black" />,
   },
   {
     year: "5+ Years",
-    title: "Independent Trader",
-    org: "Forex & Intraday",
-    desc: "Developing disciplined trading strategies with a focus on risk management, price action, and psychological control."
+    title: "Professional Trading",
+    org: "Financial Markets",
+    desc: "Developed a deep understanding of risk management, probability, and split-second decision making. Translates to writing robust, fault-tolerant code.",
+    icon: <LineChart className="w-6 h-6 text-black" />,
   },
   {
     year: "6+ Years",
-    title: "Competitive Gamer",
-    org: "Esports",
-    desc: "Competing in high-stakes BGMI finals with fast decision-making, strategic thinking, and team coordination."
+    title: "Esports & High-Stakes Gaming",
+    org: "Competitive Circuit",
+    desc: "Cultivated intense focus, systems thinking, and rapid execution under pressure. Essential traits for modern full-stack development and debugging.",
+    icon: <Gamepad2 className="w-6 h-6 text-black" />,
   },
   {
     year: "3 Years",
-    title: "Pharmacy Operations",
-    org: "Healthcare",
-    desc: "Developed operational discipline, attention to detail, and reliable workflow management in a high-stakes environment."
+    title: "Pharmacy Background",
+    org: "Medical Field",
+    desc: "Learned strict compliance, attention to detail, and methodical problem solving. A solid foundation for writing secure, bug-free software.",
+    icon: <HeartPulse className="w-6 h-6 text-black" />,
   }
 ];
 
-function JourneyStep({ step, index }: { step: any, index: number }) {
-  const ref = useRef(null);
-  
-  // Track scroll position relative to THIS specific element
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["0 1", "0.6 1"] // Starts animating when top of element hits bottom of viewport, finishes when it reaches 40% up
-  });
-
-  // 3D Physics mapped to scroll progress
-  const scale = useTransform(scrollYProgress, [0, 1], [0.7, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const rotateX = useTransform(scrollYProgress, [0, 1], [45, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [150, 0]);
-  
-  // Parallax the content slightly
-  const contentY = useTransform(scrollYProgress, [0, 1], [50, 0]);
-
-  return (
-    <motion.div 
-      ref={ref}
-      style={{ 
-        scale, 
-        opacity, 
-        rotateX, 
-        y, 
-        transformOrigin: "top center",
-        transformStyle: "preserve-3d" 
-      }}
-      className="mb-24 last:mb-0 relative w-full"
-    >
-      {/* 3D Connector Node */}
-      <div className="absolute -left-[37px] md:-left-[69px] top-8 w-4 h-4 rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,0.8)] z-10" />
-      <div className="absolute -left-[45px] md:-left-[77px] top-6 w-8 h-8 rounded-full border border-white/30 animate-[ping_3s_linear_infinite] z-0" />
-      
-      {/* 3D Glass Card */}
-      <div className="bg-[#0A0A0A]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group hover:border-white/30 transition-all duration-500">
-        
-        {/* Dynamic Inner Shine */}
-        <div className="absolute inset-0 -translate-x-[150%] skew-x-[-30deg] bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-
-        <motion.div style={{ y: contentY }} className="flex flex-col gap-4 relative z-10">
-          <span className="text-xs md:text-sm uppercase tracking-[0.3em] font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500">
-            {step.year}
-          </span>
-          <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-white drop-shadow-xl">
-            {step.title}
-          </h3>
-          <h4 className="text-lg md:text-xl font-bold text-white/60 font-mono mb-2 uppercase tracking-widest">
-            {step.org}
-          </h4>
-          <p className="text-base md:text-lg text-white/40 font-body leading-relaxed max-w-3xl">
-            {step.desc}
-          </p>
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Journey() {
   const containerRef = useRef(null);
-  
-  // Parallax the header
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-  const headerY = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   return (
-    <section id="journey" className="py-32 bg-[#050505] text-white border-t border-white/5 relative overflow-hidden" ref={containerRef}>
-      
-      {/* Deep Space Background Lighting */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-900/10 blur-[150px] rounded-full pointer-events-none"></div>
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-blue-900/10 blur-[150px] rounded-full pointer-events-none"></div>
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <section id="journey" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10 overflow-hidden" ref={containerRef}>
+      <div className="container mx-auto px-4 md:px-8 max-w-6xl">
         
-        <motion.div style={{ y: headerY }} className="mb-24 text-center md:text-left flex flex-col items-center md:items-start relative z-20">
-          <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter font-heading text-white leading-none">
-            The<br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-br from-white to-white/20">Journey</span>
+        <div className="mb-20 md:mb-32">
+          <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-6 font-heading">
+            The <br className="md:hidden"/> <span className="text-black/30">Journey</span>
           </h2>
-          <p className="text-base md:text-lg mt-6 font-medium max-w-2xl text-white/40 font-mono tracking-widest uppercase">
+          <p className="text-lg md:text-xl font-bold max-w-2xl text-black/70">
             An unconventional path building systems thinking, risk management, and rapid execution.
           </p>
-        </motion.div>
+        </div>
 
-        {/* 3D Perspective Container */}
-        <div style={{ perspective: "2000px" }} className="max-w-5xl mx-auto md:ml-12 border-l-2 border-white/10 pl-8 md:pl-16 relative z-10">
+        <div className="max-w-5xl mx-auto md:ml-12 border-l-2 border-black/20 pl-8 md:pl-16 relative perspective-[2000px]">
           {journeySteps.map((step, index) => (
             <JourneyStep key={index} step={step} index={index} />
           ))}
@@ -134,5 +66,50 @@ export default function Journey() {
 
       </div>
     </section>
+  );
+}
+
+function JourneyStep({ step, index }: { step: any, index: number }) {
+  const ref = useRef(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["0 1", "0.6 1"]
+  });
+
+  const rotateX = useTransform(scrollYProgress, [0, 1], [45, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
+
+  return (
+    <motion.div 
+      ref={ref}
+      style={{ rotateX, scale, opacity, y, transformOrigin: "bottom center" }}
+      className="relative mb-24 last:mb-0 transform-style-3d"
+    >
+      <div className="absolute -left-[41px] md:-left-[81px] top-0 w-12 h-12 bg-[#EAEAEA] border-2 border-black flex items-center justify-center shadow-[4px_4px_0_0_#000] z-10">
+        {step.icon}
+      </div>
+
+      <div className="bg-[#EAEAEA] border-2 border-black p-8 md:p-12 shadow-[8px_8px_0_0_#000] hover:shadow-[12px_12px_0_0_#000] transition-shadow duration-300 group">
+        <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 mb-6">
+          <span className="text-black bg-white border border-black font-mono font-bold px-4 py-2 text-sm uppercase tracking-widest inline-block self-start shadow-[2px_2px_0_0_#000]">
+            {step.year}
+          </span>
+          <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-black">
+            {step.title}
+          </h3>
+        </div>
+        
+        <h4 className="text-sm font-bold font-mono uppercase tracking-widest text-black/50 mb-6 pb-6 border-b border-black/10">
+          {step.org}
+        </h4>
+        
+        <p className="text-black/80 leading-relaxed md:text-lg">
+          {step.desc}
+        </p>
+      </div>
+    </motion.div>
   );
 }

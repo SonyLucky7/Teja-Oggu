@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -42,11 +42,12 @@ export default function AnimatedText({
     },
   };
 
-  const MotionComponent = motion(Component);
-
   if (prefersReducedMotion) {
     return <Component className={className}>{text}</Component>;
   }
+
+  // @ts-expect-error - Framer Motion types for dynamic components can be overly strict
+  const MotionComponent = motion.create ? motion.create(Component) : motion(Component);
 
   return (
     <MotionComponent

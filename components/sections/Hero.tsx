@@ -74,8 +74,9 @@ export default function Hero() {
 
   return (
     <section 
+      id="home"
       ref={containerRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0A0A0A]"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#080808] text-white"
     >
       <motion.div 
         style={{ y: y1, opacity }}
