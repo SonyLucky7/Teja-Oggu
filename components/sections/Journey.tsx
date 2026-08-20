@@ -80,7 +80,10 @@ export default function Journey() {
           </motion.p>
         </div>
 
-        <div className="max-w-5xl mx-auto md:ml-12 border-l-2 border-black/20 pl-8 md:pl-16 relative perspective-[2000px]">
+        <div 
+          className="max-w-5xl mx-auto md:ml-12 border-l-2 border-black/20 pl-8 md:pl-16 relative"
+          style={{ perspective: "2000px" }}
+        >
           {journeySteps.map((step, index) => (
             <JourneyStep key={index} step={step} index={index} />
           ))}
@@ -96,30 +99,42 @@ function JourneyStep({ step, index }: { step: any, index: number }) {
   
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["0 1", "0.6 1"]
+    offset: ["0 1", "0.7 1"]
   });
 
-  const rotateX = useTransform(scrollYProgress, [0, 1], [45, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  // Extreme 3D folding effect
+  const rotateX = useTransform(scrollYProgress, [0, 1], [80, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
   const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [150, 0]);
 
   return (
     <motion.div 
       ref={ref}
-      style={{ rotateX, scale, opacity, y, transformOrigin: "bottom center" }}
-      className="relative mb-24 last:mb-0 transform-style-3d"
+      style={{ 
+        rotateX, 
+        scale, 
+        opacity, 
+        y, 
+        transformOrigin: "top center",
+        transformStyle: "preserve-3d" 
+      }}
+      className="relative mb-24 last:mb-0"
     >
       <div className="absolute -left-[41px] md:-left-[81px] top-0 w-12 h-12 bg-[#EAEAEA] border-2 border-black flex items-center justify-center shadow-[4px_4px_0_0_#000] z-10">
         {step.icon}
       </div>
 
-      <div className="bg-[#EAEAEA] border-2 border-black p-8 md:p-12 shadow-[8px_8px_0_0_#000] hover:shadow-[12px_12px_0_0_#000] transition-shadow duration-300 group">
+      <motion.div 
+        whileHover={{ scale: 1.02, x: -5, y: -5 }}
+        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+        className="bg-[#EAEAEA] border-2 border-black p-8 md:p-12 shadow-[8px_8px_0_0_#000] hover:shadow-[16px_16px_0_0_#000] transition-shadow duration-300 group"
+      >
         <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 mb-6">
           <span className="text-black bg-white border border-black font-mono font-bold px-4 py-2 text-sm uppercase tracking-widest inline-block self-start shadow-[2px_2px_0_0_#000]">
             {step.year}
           </span>
-          <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-black">
+          <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-black group-hover:translate-x-2 transition-transform duration-300">
             {step.title}
           </h3>
         </div>
@@ -131,7 +146,7 @@ function JourneyStep({ step, index }: { step: any, index: number }) {
         <p className="text-black/80 leading-relaxed md:text-lg">
           {step.desc}
         </p>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
