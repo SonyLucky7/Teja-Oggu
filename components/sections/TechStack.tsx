@@ -1,11 +1,11 @@
-﻿"use client";
+"use client";
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const skills = [
   { category: "Frontend", items: ["React.js", "Next.js", "Tailwind CSS", "Redux", "Framer Motion", "TypeScript"] },
-  { category: "Backend", items: ["Node.js", "Express.js", "MongoDB", "PostgreSQL", "Prisma ORM", "Firebase"] },
+  { category: "Backend", items: ["Node.js", "Express.js", "MySQL", "PostgreSQL", "MongoDB", "Prisma ORM", "Firebase"] },
   { category: "AI & APIs", items: ["OpenAI API", "Gemini API", "Stripe Integration", "REST APIs", "GraphQL"] },
   { category: "Security", items: ["Clerk Auth", "NextAuth", "JWT", "OAuth", "Role-Based Access"] },
   { category: "Marketing", items: ["Meta Ads", "Google Ads", "WhatsApp Auto", "Lead Gen", "SEO"] },
