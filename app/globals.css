@@ -1,9 +1,19 @@
 @import "tailwindcss";
 
-@theme {
-  --color-border: rgba(0, 0, 0, 0.1);
+@theme inline {
   --color-background: #f5f5f5;
+  --color-background-secondary: #ffffff;
+  --color-surface: #e5e5e5;
   --color-foreground: #111111;
+  --color-muted: #555555;
+  --color-accent: #111111;
+  --color-accent-hover: #333333;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --font-heading: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
+  --font-instrument-sans: var(--font-instrument-sans);
+  --font-instrument-serif: var(--font-instrument-serif);
 }
 
 @layer base {

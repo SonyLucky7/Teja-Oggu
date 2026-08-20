@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { spaceGrotesk, inter, ibmPlexMono } from '@/lib/fonts'
+import { spaceGrotesk, inter, ibmPlexMono, instrumentSans, instrumentSerif } from '@/lib/fonts'
 import ScrollProgress from '@/components/ui/ScrollProgress'
 import GridBackground from '@/components/visuals/GridBackground'
 import './globals.css'
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable} antialiased`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable} ${instrumentSans.variable} ${instrumentSerif.variable} antialiased`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>

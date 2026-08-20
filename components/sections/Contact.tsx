@@ -1,164 +1,165 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Mail, MessageSquare, Send, Copy, CheckCircle2 } from 'lucide-react';
-import { DiscordIcon, InstagramIcon, TwitterIcon } from '@/components/ui/SocialIcons';
+import { Mail, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
+import { DiscordIcon, TwitterIcon, GithubIcon } from '@/components/ui/SocialIcons';
+import { motion } from 'framer-motion';
+
+const contactLinks = [
+  {
+    name: "GitHub",
+    action: "COMMIT",
+    href: "https://github.com/SonyLucky7",
+    icon: <GithubIcon className="w-10 h-10 fill-white" />,
+    hoverClass: "group-hover:border-purple-500/50 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]",
+    actionColor: "group-hover:text-purple-400",
+    badge: true
+  },
+  {
+    name: "Discord",
+    action: "JOIN",
+    copyText: "karmaa_07",
+    icon: <DiscordIcon className="w-10 h-10 fill-[#5865F2]" />,
+    hoverClass: "group-hover:border-[#5865F2]/50 group-hover:shadow-[0_0_30px_rgba(88,101,242,0.15)]",
+    actionColor: "group-hover:text-[#5865F2]"
+  },
+  {
+    name: "Outlook",
+    action: "MAIL",
+    href: "mailto:tejavoggu@outlook.com",
+    icon: <Mail className="w-10 h-10 text-[#0078D4]" />,
+    hoverClass: "group-hover:border-[#0078D4]/50 group-hover:shadow-[0_0_30px_rgba(0,120,212,0.15)]",
+    actionColor: "group-hover:text-[#0078D4]"
+  },
+  {
+    name: "WhatsApp",
+    action: "CONNECT",
+    href: "https://wa.me/916300464187",
+    icon: <MessageSquare className="w-10 h-10 text-[#25D366]" />,
+    hoverClass: "group-hover:border-[#25D366]/50 group-hover:shadow-[0_0_30px_rgba(37,211,102,0.15)]",
+    actionColor: "group-hover:text-[#25D366]"
+  },
+  {
+    name: "Telegram",
+    action: "CHAT",
+    href: "https://t.me/xO_HaC",
+    icon: <Send className="w-10 h-10 text-[#229ED9]" />,
+    hoverClass: "group-hover:border-[#229ED9]/50 group-hover:shadow-[0_0_30px_rgba(34,158,217,0.15)]",
+    actionColor: "group-hover:text-[#229ED9]"
+  },
+  {
+    name: "Twitter",
+    action: "ENGAGE",
+    href: "https://x.com/Karmaa_07",
+    icon: <TwitterIcon className="w-10 h-10 fill-white" />,
+    hoverClass: "group-hover:border-white/50 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]",
+    actionColor: "group-hover:text-white"
+  }
+];
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText('sonylucky46hac@gmail.com');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 3000);
-    }, 1500);
-  };
-
   return (
-    <section id="contact" className="py-24 md:py-32 bg-white border-b border-black/15">
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="contact" className="py-24 md:py-32 bg-[#050505] text-white relative overflow-hidden min-h-[80vh] flex items-center">
+      
+      {/* Background Starry Particles */}
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj4KICA8ZyBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuMDUiPgogICAgPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIgLz4KICAgIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjMwMCIgcj0iMS41IiAvPgogICAgPGNpcmNsZSBjeD0iMjUwIiBjeT0iMTUwIiByPSIwLjUiIC8+CiAgICA8Y2lyY2xlIGN4PSIzNTAiIGN5PSI1MCIgcj0iMSIgLz4KICA8L2c+Cjwvc3ZnPg==')]"></div>
+      </div>
+      
+      {/* Subtle Glows */}
+      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center">
         
-        <div className="mb-16">
-          <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter font-heading">
-            Initiate
+        {/* Avatar Profile */}
+        <div className="flex flex-col items-center text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase mb-12">
+            Web Presence - <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500">DEV NETWORK</span>
           </h2>
-          <p className="text-xl md:text-2xl mt-4 font-medium max-w-2xl">
-            Ready to build? Drop a message.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-8">
-          
-          {/* Left Column */}
-          <div>
-            <div className="flex flex-col gap-6 font-mono">
-              
-              {/* Email */}
-              <div className="border-2 border-black p-6 flex items-center justify-between hover:bg-black hover:text-white transition-colors group">
-                <div className="flex items-center gap-4">
-                  <Mail size={24} />
-                  <div>
-                    <p className="text-xs uppercase tracking-widest font-bold opacity-60 group-hover:opacity-80">Email</p>
-                    <p className="text-lg font-bold">sonylucky46hac@gmail.com</p>
-                  </div>
-                </div>
-                <button
-                  onClick={handleCopyEmail}
-                  className="p-2 transition-colors"
-                  title="Copy Email"
-                >
-                  {copied ? <CheckCircle2 size={24} /> : <Copy size={24} />}
-                </button>
-              </div>
-
-              {/* WhatsApp & Telegram */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <a href="https://wa.me/916300464187" target="_blank" rel="noopener noreferrer" className="block">
-                  <div className="border-2 border-black p-6 flex items-center gap-4 hover:bg-[#25D366] hover:text-white hover:border-[#25D366] transition-colors group">
-                    <MessageSquare size={24} />
-                    <div>
-                      <p className="text-xs uppercase tracking-widest font-bold opacity-60 group-hover:opacity-80">WhatsApp</p>
-                      <p className="font-bold">+91 6300464187</p>
-                    </div>
-                  </div>
-                </a>
-                
-                <a href="https://t.me/xO_HaC" target="_blank" rel="noopener noreferrer" className="block">
-                  <div className="border-2 border-black p-6 flex items-center gap-4 hover:bg-[#229ED9] hover:text-white hover:border-[#229ED9] transition-colors group">
-                    <Send size={24} />
-                    <div>
-                      <p className="text-xs uppercase tracking-widest font-bold opacity-60 group-hover:opacity-80">Telegram</p>
-                      <p className="font-bold">@xO_HaC</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              {/* Socials */}
-              <div className="grid grid-cols-3 gap-6 pt-6 border-t-2 border-black/15">
-                <div className="border border-black/15 p-4 flex flex-col items-center gap-2">
-                  <DiscordIcon className="w-6 h-6" />
-                  <span className="text-xs text-center font-bold">karmaa_07</span>
-                </div>
-                <a href="https://instagram.com/zxn_wxx7" target="_blank" rel="noopener noreferrer" className="border border-black/15 p-4 flex flex-col items-center gap-2 hover:bg-black hover:text-white transition-colors">
-                  <InstagramIcon className="w-6 h-6" />
-                  <span className="text-xs text-center font-bold">@zxn_wxx7</span>
-                </a>
-                <a href="https://x.com/Karmaa_07" target="_blank" rel="noopener noreferrer" className="border border-black/15 p-4 flex flex-col items-center gap-2 hover:bg-black hover:text-white transition-colors">
-                  <TwitterIcon className="w-6 h-6" />
-                  <span className="text-xs text-center font-bold">@Karmaa_07</span>
-                </a>
-              </div>
+          <div className="relative group mb-6">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 opacity-60 blur-md animate-[spin_4s_linear_infinite]"></div>
+            <div className="relative w-32 h-32 md:w-36 md:h-36 rounded-full bg-[#111] border border-white/10 flex items-center justify-center overflow-hidden z-10">
+              <span className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white">TO</span>
             </div>
           </div>
-
-          {/* Right Column Form */}
-          <div className="bg-[#f5f5f5] border-2 border-black p-8">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="name" className="text-xs font-bold uppercase tracking-widest font-mono">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    className="w-full bg-white border-2 border-black px-4 py-3 focus:outline-none focus:ring-4 focus:ring-black/10 transition-all font-mono"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest font-mono">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    className="w-full bg-white border-2 border-black px-4 py-3 focus:outline-none focus:ring-4 focus:ring-black/10 transition-all font-mono"
-                    placeholder="john@example.com"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="subject" className="text-xs font-bold uppercase tracking-widest font-mono">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  required
-                  className="w-full bg-white border-2 border-black px-4 py-3 focus:outline-none focus:ring-4 focus:ring-black/10 transition-all font-mono"
-                  placeholder="Project Inquiry"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="message" className="text-xs font-bold uppercase tracking-widest font-mono">Message</label>
-                <textarea
-                  id="message"
-                  required
-                  rows={5}
-                  className="w-full bg-white border-2 border-black px-4 py-3 focus:outline-none focus:ring-4 focus:ring-black/10 transition-all font-mono resize-none"
-                  placeholder="Hello, I'd like to talk about..."
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-black text-white font-bold uppercase tracking-widest py-4 px-8 border-2 border-black hover:bg-white hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2 mt-4"
-              >
-                {isSubmitting ? "Sending..." : submitted ? "Message Sent!" : "Send Transmission"}
-              </button>
-            </form>
+          
+          <div className="font-mono text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500 tracking-[0.2em] uppercase">
+            @Teja_Oggu
           </div>
         </div>
+
+        {/* Square Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 w-full max-w-6xl">
+          {contactLinks.map((link, i) => (
+            link.copyText ? (
+              <CopyCard key={i} {...link} />
+            ) : (
+              <LinkCard key={i} {...link} />
+            )
+          ))}
+        </div>
+
+        <p className="mt-16 text-white/30 text-xs font-mono tracking-[0.2em] uppercase">
+          Explore further by clicking on any of the profile cards above!
+        </p>
       </div>
     </section>
+  );
+}
+
+function LinkCard({ name, action, href, icon, hoverClass, actionColor, badge }: any) {
+  return (
+    <a 
+      href={href} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className={`group flex flex-col items-center justify-center gap-6 p-8 bg-[#0a0a0c] border border-white/5 rounded-2xl transition-all duration-300 relative overflow-hidden ${hoverClass}`}
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+      
+      {badge && (
+        <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]"></div>
+      )}
+
+      <div className="transform group-hover:-translate-y-1 transition-transform duration-300">
+        {icon}
+      </div>
+      
+      <div className="flex flex-col items-center gap-1.5 text-center">
+        <h3 className="text-xl font-bold text-white tracking-tight">{name}</h3>
+        <span className={`text-[10px] md:text-xs font-mono uppercase tracking-widest text-white/30 transition-colors duration-300 ${actionColor}`}>
+          {action}
+        </span>
+      </div>
+    </a>
+  );
+}
+
+function CopyCard({ name, action, copyText, icon, hoverClass, actionColor }: any) {
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <button 
+      onClick={() => {
+        navigator.clipboard.writeText(copyText);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }}
+      className={`group flex flex-col items-center justify-center gap-6 p-8 bg-[#0a0a0c] border border-white/5 rounded-2xl transition-all duration-300 relative overflow-hidden cursor-pointer ${hoverClass}`}
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+      
+      <div className="transform group-hover:-translate-y-1 transition-transform duration-300">
+        {copied ? <CheckCircle2 className="w-10 h-10 text-green-500" /> : icon}
+      </div>
+      
+      <div className="flex flex-col items-center gap-1.5 text-center">
+        <h3 className="text-xl font-bold text-white tracking-tight">{copied ? "Copied!" : name}</h3>
+        <span className={`text-[10px] md:text-xs font-mono uppercase tracking-widest text-white/30 transition-colors duration-300 ${actionColor}`}>
+          {copied ? "COPIED" : action}
+        </span>
+      </div>
+    </button>
   );
 }

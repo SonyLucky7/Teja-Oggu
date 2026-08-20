@@ -46,7 +46,7 @@ export default function Preloader() {
           initial={{ y: 0 }}
           exit={{ y: '-100%' }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] as const, delay: 0.2 }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#080808]"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#f5f5f5]"
         >
           <div className="flex flex-col items-center">
             <div className="flex space-x-4 overflow-hidden mb-2 text-reveal">
@@ -60,7 +60,7 @@ export default function Preloader() {
                     ease: [0.76, 0, 0.24, 1] as const,
                     delay: idx * 0.1
                   }}
-                  className="text-6xl md:text-8xl font-heading font-bold tracking-tighter text-[#F5F5F5] inline-block"
+                  className="text-6xl md:text-8xl font-heading font-black tracking-tighter text-[#111111] uppercase inline-block"
                 >
                   {word}
                 </motion.span>
@@ -71,20 +71,20 @@ export default function Preloader() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="text-sm font-mono text-[#8A8A8A]"
+              className="text-sm font-mono text-[#555555] tracking-widest uppercase"
             >
               AI-Augmented Full-Stack Developer
             </motion.div>
           </div>
 
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-[80%] max-w-md flex flex-col gap-2">
-            <div className="flex justify-between items-center text-sm font-mono text-[#8A8A8A]">
+            <div className="flex justify-between items-center text-sm font-mono text-[#111111]">
               <span>LOADING</span>
               <span>{progress}%</span>
             </div>
-            <div className="h-[2px] w-full bg-[#161616] overflow-hidden">
+            <div className="h-[1px] w-full bg-black/10 overflow-hidden">
               <motion.div
-                className="h-full bg-[#3B82F6]"
+                className="h-full bg-black"
                 initial={{ width: '0%' }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.2, ease: 'linear' }}

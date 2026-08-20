@@ -1,41 +1,47 @@
-'use client';
+﻿"use client";
+
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring, useTransform, useMotionValue, useVelocity, useAnimationFrame } from 'framer-motion';
 
 export default function Marquee() {
-  const text = "SAAS • CRM • AI INTEGRATION • AUTOMATION • APIS • FULL-STACK • SECURITY • DEPLOYMENT • ";
-  
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], { clamp: false });
+
+  const directionFactor = useRef<number>(1);
+  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+
+  useAnimationFrame((t, delta) => {
+    let moveBy = directionFactor.current * -0.01 * delta; // Base speed
+
+    // Add scroll velocity 
+    if (velocityFactor.get() < 0) {
+      directionFactor.current = -1;
+    } else if (velocityFactor.get() > 0) {
+      directionFactor.current = 1;
+    }
+
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+    baseX.set(baseX.get() + moveBy);
+  });
+
   return (
-    <div className="w-full py-8 border-y border-[rgba(255,255,255,0.08)] bg-[#101010] overflow-hidden flex whitespace-nowrap group">
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 20s linear infinite;
-        }
-        .group:hover .animate-marquee {
-          animation-duration: 40s;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-marquee {
-            animation-play-state: paused !important;
-          }
-        }
-      `}} />
-      <div className="flex animate-marquee">
-        <div className="text-2xl md:text-4xl font-heading font-bold tracking-tight text-[#F5F5F5] opacity-20 mr-4">
-          {text}
-        </div>
-        <div className="text-2xl md:text-4xl font-heading font-bold tracking-tight text-[#F5F5F5] opacity-20 mr-4">
-          {text}
-        </div>
-        <div className="text-2xl md:text-4xl font-heading font-bold tracking-tight text-[#F5F5F5] opacity-20 mr-4">
-          {text}
-        </div>
-        <div className="text-2xl md:text-4xl font-heading font-bold tracking-tight text-[#F5F5F5] opacity-20 mr-4">
-          {text}
-        </div>
+    <section className="py-8 md:py-16 overflow-hidden bg-[#0A0A0A] border-y border-white/5 flex flex-col items-center justify-center">
+      <div className="flex whitespace-nowrap overflow-hidden">
+        <motion.div className="flex whitespace-nowrap text-[8vw] leading-none font-bold uppercase tracking-tighter font-heading text-white/5" style={{ x }}>
+          <span className="mr-8">SAAS • CRM • AI INTEGRATION • AUTOMATION • APIS • FULL-STACK • SECURITY • DEPLOYMENT •</span>
+          <span className="mr-8">SAAS • CRM • AI INTEGRATION • AUTOMATION • APIS • FULL-STACK • SECURITY • DEPLOYMENT •</span>
+          <span className="mr-8">SAAS • CRM • AI INTEGRATION • AUTOMATION • APIS • FULL-STACK • SECURITY • DEPLOYMENT •</span>
+          <span className="mr-8">SAAS • CRM • AI INTEGRATION • AUTOMATION • APIS • FULL-STACK • SECURITY • DEPLOYMENT •</span>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
+}
+
+function wrap(min: number, max: number, v: number) {
+  const rangeSize = max - min;
+  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
 }

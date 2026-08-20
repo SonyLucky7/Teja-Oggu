@@ -67,7 +67,7 @@ export default function CustomCursor() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-[#3B82F6] rounded-full pointer-events-none z-[99]"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-black rounded-full pointer-events-none z-[99]"
         style={{
           x: innerX,
           y: innerY,
@@ -77,7 +77,7 @@ export default function CustomCursor() {
         }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-10 h-10 border border-white/20 rounded-full pointer-events-none z-[99] flex items-center justify-center text-[10px] font-mono tracking-widest text-[#F5F5F5]"
+        className="fixed top-0 left-0 w-10 h-10 border border-black/20 rounded-full pointer-events-none z-[99] flex items-center justify-center text-[10px] font-mono tracking-widest text-[#111111]"
         style={{
           x: outerX,
           y: outerY,
@@ -86,8 +86,9 @@ export default function CustomCursor() {
         }}
         animate={{
           scale: hoverType === 'view' ? 2.5 : hoverType === 'pointer' ? 1.5 : 1,
-          backgroundColor: hoverType === 'view' ? 'rgba(59, 130, 246, 0.8)' : hoverType === 'pointer' ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
-          borderColor: hoverType === 'view' ? 'rgba(59, 130, 246, 0)' : 'rgba(255, 255, 255, 0.2)'
+          backgroundColor: hoverType === 'view' ? 'rgba(0, 0, 0, 0.8)' : hoverType === 'pointer' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0)',
+          borderColor: hoverType === 'view' ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0.2)',
+          color: hoverType === 'view' ? '#ffffff' : '#111111'
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       >
