@@ -28,7 +28,7 @@ const contactLinks = [
   {
     name: "Instagram",
     action: "FOLLOW",
-    href: "https://instagram.com/karmaa_07",
+    href: "https://instagram.com/zxn_wxx",
     icon: <InstagramIcon className="w-10 h-10 text-black" />,
   },
   {
