@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
@@ -14,9 +14,25 @@ export default function About() {
           
           {/* Header */}
           <div className="md:col-span-4">
-            <h2 className="text-7xl md:text-[100px] leading-[0.9] font-black uppercase tracking-tighter font-heading sticky top-32">
-              <span className="text-black block">THE</span>
-              <span className="text-[#B3B3B3] block">MINDSET</span>
+            <h2 className="text-7xl md:text-[100px] leading-[0.9] font-black uppercase tracking-tighter font-heading sticky top-32 overflow-hidden">
+              <motion.span 
+                initial={{ x: -100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+                viewport={{ once: false, margin: "-100px" }}
+                className="text-black block"
+              >
+                THE
+              </motion.span>
+              <motion.span 
+                initial={{ x: 100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.8, type: "spring", bounce: 0.2, delay: 0.1 }}
+                viewport={{ once: false, margin: "-100px" }}
+                className="text-[#B3B3B3] block"
+              >
+                MINDSET
+              </motion.span>
             </h2>
           </div>
 

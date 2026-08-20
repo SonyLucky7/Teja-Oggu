@@ -84,7 +84,7 @@ export default function Hero() {
         style={{ y: y1, opacity }}
         className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center text-center"
       >
-        <div className="overflow-hidden flex justify-center text-[48px] sm:text-[64px] md:text-[84px] lg:text-[100px] leading-[1] font-bold uppercase tracking-[-0.02em] font-heading text-white">
+        <div className="overflow-hidden flex flex-wrap justify-center text-[18vw] md:text-[140px] leading-[0.85] font-black uppercase tracking-tighter font-heading text-white">
           {"TEJA OGGU".split("").map((char, idx) => (
             <motion.span
               key={idx}
@@ -100,7 +100,7 @@ export default function Hero() {
           ))}
         </div>
 
-        <div className="mt-2 md:mt-4 h-[30px] md:h-[40px] flex items-center justify-center overflow-hidden relative w-full">
+        <div className="mt-4 md:mt-8 h-[60px] md:h-[40px] flex items-center justify-center overflow-hidden relative w-full px-4">
           <AnimatePresence mode="wait">
             {mounted && (
               <motion.h2
@@ -109,7 +109,7 @@ export default function Hero() {
                 animate="visible"
                 exit="exit"
                 variants={subtitleVariants}
-                className="absolute text-[16px] md:text-[20px] leading-[1.2] font-normal italic tracking-[0.05em] font-instrument-serif text-white/70 whitespace-nowrap"
+                className="absolute text-sm md:text-xl font-bold uppercase tracking-widest text-center text-white/70"
               >
                 {roles[currentRole]}
               </motion.h2>

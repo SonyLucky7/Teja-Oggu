@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Mail, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
 import { DiscordIcon, TwitterIcon, GithubIcon } from '@/components/ui/SocialIcons';
 
@@ -48,9 +49,25 @@ export default function Contact() {
     <section id="contact" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-t border-black/10 flex items-center">
       <div className="container mx-auto px-4 md:px-6 flex flex-col items-center">
         
-        <div className="flex flex-col items-center text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-12 font-heading">
-            LET'S <span className="text-black/30">TALK</span>
+        <div className="flex flex-col items-center text-center mb-16 overflow-hidden">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-12 font-heading flex gap-4">
+            <motion.span
+              initial={{ x: -100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+              viewport={{ once: false, margin: "-100px" }}
+            >
+              LET'S
+            </motion.span>
+            <motion.span
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.2, delay: 0.1 }}
+              viewport={{ once: false, margin: "-100px" }}
+              className="text-black/30"
+            >
+              TALK
+            </motion.span>
           </h2>
 
           <div className="relative mb-6">

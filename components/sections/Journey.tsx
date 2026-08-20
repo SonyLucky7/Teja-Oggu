@@ -49,11 +49,33 @@ export default function Journey() {
     <section id="journey" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10 overflow-hidden" ref={containerRef}>
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
         
-        <div className="mb-20 md:mb-32">
-          <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-6 font-heading">
-            The <br className="md:hidden"/> <span className="text-black/30">Journey</span>
+        <div className="mb-20 md:mb-32 overflow-hidden">
+          <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-6 font-heading flex flex-col">
+            <motion.span
+              initial={{ x: -100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+              viewport={{ once: false, margin: "-100px" }}
+            >
+              The
+            </motion.span>
+            <motion.span
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.2, delay: 0.1 }}
+              viewport={{ once: false, margin: "-100px" }}
+              className="text-black/30"
+            >
+              Journey
+            </motion.span>
           </h2>
-          <p className="text-lg md:text-xl font-bold max-w-2xl text-black/70">
+          <motion.p 
+            initial={{ opacity: 0 }} 
+            whileInView={{ opacity: 1 }} 
+            transition={{ duration: 1, delay: 0.3 }}
+            viewport={{ once: false }}
+            className="text-lg md:text-xl font-bold max-w-2xl text-black/70"
+          >
             An unconventional path building systems thinking, risk management, and rapid execution.
           </p>
         </div>

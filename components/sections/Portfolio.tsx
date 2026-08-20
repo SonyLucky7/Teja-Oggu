@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
@@ -54,9 +54,25 @@ export default function Portfolio() {
     <section id="portfolio" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10">
       <div className="container mx-auto px-4 md:px-8 max-w-[1400px]" ref={containerRef}>
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-black/10 pb-8">
-          <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter font-heading leading-[0.9]">
-            SELECTED<br/>WORK
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-black/10 pb-8 overflow-hidden">
+          <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter font-heading leading-[0.9] flex flex-col">
+            <motion.span
+              initial={{ x: -100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+              viewport={{ once: false, margin: "-100px" }}
+            >
+              SELECTED
+            </motion.span>
+            <motion.span
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.2, delay: 0.1 }}
+              viewport={{ once: false, margin: "-100px" }}
+              className="text-black/30"
+            >
+              WORK
+            </motion.span>
           </h2>
           <div className="md:w-1/3 text-lg font-bold">
             A collection of robust systems, AI integrations, and full-stack solutions.
