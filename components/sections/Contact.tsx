@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MessageSquare, Send, CheckCircle2, Instagram } from 'lucide-react';
-import { DiscordIcon, TwitterIcon, GithubIcon } from '@/components/ui/SocialIcons';
+import { Mail, MessageSquare, Send, CheckCircle2 } from 'lucide-react';
+import { DiscordIcon, TwitterIcon, GithubIcon, InstagramIcon } from '@/components/ui/SocialIcons';
 
 const contactLinks = [
   {
@@ -29,7 +29,7 @@ const contactLinks = [
     name: "Instagram",
     action: "FOLLOW",
     href: "https://instagram.com/karmaa_07",
-    icon: <Instagram className="w-10 h-10 text-black" />,
+    icon: <InstagramIcon className="w-10 h-10 text-black" />,
   },
   {
     name: "Telegram",
