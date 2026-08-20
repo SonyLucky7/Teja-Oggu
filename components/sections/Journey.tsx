@@ -77,7 +77,7 @@ export default function Journey() {
             className="text-lg md:text-xl font-bold max-w-2xl text-black/70"
           >
             An unconventional path building systems thinking, risk management, and rapid execution.
-          </p>
+          </motion.p>
         </div>
 
         <div className="max-w-5xl mx-auto md:ml-12 border-l-2 border-black/20 pl-8 md:pl-16 relative perspective-[2000px]">
