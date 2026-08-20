@@ -16,6 +16,7 @@ const contactLinks = [
     name: "Discord",
     action: "JOIN",
     copyText: "karmaa_07",
+    redirectUrl: "https://discord.com/app",
     icon: <DiscordIcon className="w-10 h-10 fill-black" />,
   },
   {
@@ -115,7 +116,7 @@ function LinkCard({ name, action, href, icon }: any) {
   );
 }
 
-function CopyCard({ name, action, copyText, icon }: any) {
+function CopyCard({ name, action, copyText, redirectUrl, icon }: any) {
   const [copied, setCopied] = useState(false);
 
   return (
@@ -124,6 +125,11 @@ function CopyCard({ name, action, copyText, icon }: any) {
         navigator.clipboard.writeText(copyText);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
+        if (redirectUrl) {
+          setTimeout(() => {
+            window.open(redirectUrl, '_blank');
+          }, 400);
+        }
       }}
       className="group flex flex-col items-center justify-center gap-6 p-8 bg-white border-2 border-black transition-all duration-300 shadow-[4px_4px_0_0_#000] hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 cursor-pointer"
     >
