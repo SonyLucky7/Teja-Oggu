@@ -4,12 +4,11 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 const skills = [
-  { category: "Frontend", items: ["React.js", "Next.js", "Tailwind CSS", "Redux", "Framer Motion", "TypeScript"] },
-  { category: "Backend", items: ["Node.js", "Express.js", "MySQL", "PostgreSQL", "MongoDB", "Prisma ORM", "Firebase"] },
-  { category: "AI & APIs", items: ["OpenAI API", "Gemini API", "Stripe Integration", "REST APIs", "GraphQL"] },
-  { category: "Security", items: ["Clerk Auth", "NextAuth", "JWT", "OAuth", "Role-Based Access"] },
-  { category: "Marketing", items: ["Meta Ads", "Google Ads", "WhatsApp Auto", "Lead Gen", "SEO"] },
-  { category: "Design", items: ["Figma", "UI/UX", "Graphic Design", "Video Editing"] },
+  { category: "AI Orchestration", items: ["Prompt Engineering", "Cursor & Windsurf", "Claude & ChatGPT", "AI Code Generation", "System Architecture"] },
+  { category: "Frameworks (AI-Assisted)", items: ["Next.js", "React", "Tailwind CSS", "Node.js", "Firebase", "Vercel"] },
+  { category: "Digital Marketing", items: ["Meta Ads", "Google Ads", "WhatsApp Automation", "Lead Generation", "SEO"] },
+  { category: "Design & UX", items: ["Figma", "UI/UX Design", "Graphic Design", "Video Editing", "Rapid Prototyping"] },
+  { category: "Operations", items: ["Business Strategy", "Risk Management", "Workflow Automation", "CRM Systems"] },
 ];
 
 export default function TechStack() {
