@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
@@ -80,11 +80,20 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#080808] text-white"
     >
       <Starfield />
+      
+      {/* Premium Glow Background */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 3 }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[40vh] md:w-[60vw] md:h-[50vh] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/40 via-purple-900/20 to-transparent blur-[80px] md:blur-[120px] rounded-full pointer-events-none z-0"
+      />
+
       <motion.div 
         style={{ y: y1, opacity }}
         className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center text-center w-full"
       >
-        <div className="overflow-hidden flex flex-wrap justify-center text-[12vw] sm:text-[64px] md:text-[84px] lg:text-[100px] leading-[1] font-bold uppercase tracking-[-0.02em] font-heading text-white">
+        <div className="overflow-hidden flex flex-wrap justify-center text-[12vw] sm:text-[64px] md:text-[84px] lg:text-[100px] leading-[1] font-bold uppercase tracking-[-0.02em] font-heading text-white drop-shadow-2xl">
           {"TEJA OGGU".split("").map((char, idx) => (
             <motion.span
               key={idx}
@@ -116,6 +125,21 @@ export default function Hero() {
             )}
           </AnimatePresence>
         </div>
+      </motion.div>
+
+      {/* Scroll Down Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.8, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none z-20"
+      >
+        <span className="text-[10px] md:text-xs font-mono tracking-[0.3em] text-white/40 uppercase">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[1px] h-12 bg-gradient-to-b from-white/40 to-transparent"
+        />
       </motion.div>
     </section>
   );
