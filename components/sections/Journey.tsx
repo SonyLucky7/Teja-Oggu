@@ -52,18 +52,18 @@ export default function Journey() {
         <div className="mb-20 md:mb-32 overflow-hidden">
           <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-6 font-heading flex flex-col">
             <motion.span
-              initial={{ x: -100, opacity: 0 }}
+              initial={{ x: -200, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
-              viewport={{ once: false, margin: "-100px" }}
+              transition={{ duration: 1, type: "spring", stiffness: 60, damping: 15 }}
+              viewport={{ once: true, margin: "-100px" }}
             >
               The
             </motion.span>
             <motion.span
-              initial={{ x: 100, opacity: 0 }}
+              initial={{ x: 200, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring", bounce: 0.2, delay: 0.1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              transition={{ duration: 1, type: "spring", stiffness: 60, damping: 15, delay: 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
               className="text-black/30"
             >
               Journey

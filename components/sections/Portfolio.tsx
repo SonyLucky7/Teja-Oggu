@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 const projects = [
   {
@@ -48,7 +48,6 @@ const projects = [
 
 export default function Portfolio() {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
 
   return (
     <section id="portfolio" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10">
@@ -57,26 +56,32 @@ export default function Portfolio() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-black/10 pb-8 overflow-hidden">
           <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter font-heading leading-[0.9] flex flex-col">
             <motion.span
-              initial={{ x: -100, opacity: 0 }}
+              initial={{ x: -200, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
-              viewport={{ once: false, margin: "-100px" }}
+              transition={{ duration: 1, type: "spring", stiffness: 60, damping: 15 }}
+              viewport={{ once: true, margin: "-100px" }}
             >
               SELECTED
             </motion.span>
             <motion.span
-              initial={{ x: 100, opacity: 0 }}
+              initial={{ x: 200, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring", bounce: 0.2, delay: 0.1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              transition={{ duration: 1, type: "spring", stiffness: 60, damping: 15, delay: 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
               className="text-black/30"
             >
               WORK
             </motion.span>
           </h2>
-          <div className="md:w-1/3 text-lg font-bold">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="md:w-1/3 text-lg font-bold"
+          >
             A collection of robust systems, AI integrations, and full-stack solutions.
-          </div>
+          </motion.div>
         </div>
 
         <div className="mt-16 md:mt-24 relative">
@@ -91,13 +96,34 @@ export default function Portfolio() {
 }
 
 function ProjectCard({ project, index, total }: { project: any, index: number, total: number }) {
-  const cardRef = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["start end", "start start"]
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
+  // 3D tilt on hover
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [4, -4]), { stiffness: 200, damping: 20 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-4, 4]), { stiffness: 200, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    x.set(px);
+    y.set(py);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
   
   return (
     <div 
@@ -106,7 +132,9 @@ function ProjectCard({ project, index, total }: { project: any, index: number, t
     >
       <motion.div 
         ref={cardRef}
-        style={{ scale }}
+        style={{ scale, opacity, rotateX, rotateY, transformPerspective: 1200 }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         className="w-full relative"
       >
         <div 
@@ -140,9 +168,16 @@ function ProjectCard({ project, index, total }: { project: any, index: number, t
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center pt-6 border-t border-black/20 gap-4">
             <div className="flex flex-wrap gap-2">
               {project.services.map((service: string, i: number) => (
-                <span key={i} className="text-xs font-bold uppercase tracking-widest border border-black text-black px-3 py-1 bg-white">
+                <motion.span 
+                  key={i} 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4 + i * 0.08, type: "spring", stiffness: 200 }}
+                  viewport={{ once: true }}
+                  className="text-xs font-bold uppercase tracking-widest border border-black text-black px-3 py-1 bg-white"
+                >
                   {service}
-                </span>
+                </motion.span>
               ))}
             </div>
             <span className="text-sm font-bold uppercase tracking-widest text-black bg-white px-3 py-1 border border-black">

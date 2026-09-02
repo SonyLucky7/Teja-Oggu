@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body className="bg-background text-foreground font-body min-h-screen">
+      <body className="bg-background text-foreground font-body min-h-screen noise">
         <GridBackground />
         <ScrollProgress />
         {children}

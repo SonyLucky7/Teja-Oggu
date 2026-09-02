@@ -1,11 +1,17 @@
 "use client";
 
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 export default function About() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const statsY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
     <section id="about" className="py-24 md:py-32 border-b border-black/10 bg-[#F9F9F9] text-black">
@@ -16,18 +22,18 @@ export default function About() {
           <div className="md:col-span-4">
             <h2 className="text-7xl md:text-[100px] leading-[0.9] font-black uppercase tracking-tighter font-heading sticky top-32 overflow-hidden">
               <motion.span 
-                initial={{ x: -100, opacity: 0 }}
+                initial={{ x: -200, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
+                transition={{ type: "spring", stiffness: 100, damping: 15 }}
                 viewport={{ once: false, margin: "-100px" }}
                 className="text-black block"
               >
                 THE
               </motion.span>
               <motion.span 
-                initial={{ x: 100, opacity: 0 }}
+                initial={{ x: 200, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, type: "spring", bounce: 0.2, delay: 0.1 }}
+                transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.1 }}
                 viewport={{ once: false, margin: "-100px" }}
                 className="text-[#B3B3B3] block"
               >
@@ -63,19 +69,28 @@ export default function About() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 border-y border-black/10 divide-x divide-y md:divide-y-0 divide-black/10 mt-4">
+            <motion.div 
+              style={{ y: statsY }}
+              className="grid grid-cols-2 md:grid-cols-4 border-y border-black/10 divide-x divide-y md:divide-y-0 divide-black/10 mt-4"
+            >
               {[
                 { label: 'GAMING (HAC) YEARS', value: '6+' },
                 { label: 'TRADING YEARS', value: '5+' },
                 { label: 'PHARMACY YEARS', value: '3+' },
                 { label: 'DEVELOPMENT YEARS', value: '5+' }
               ].map((stat, i) => (
-                <div key={i} className="py-10 px-4 flex flex-col items-center justify-center text-center group">
-                  <div className="text-5xl md:text-6xl font-black font-heading mb-3 text-black group-hover:scale-110 transition-transform">{stat.value}</div>
+                <div key={i} className="py-10 px-4 flex flex-col items-center justify-center text-center group overflow-hidden">
+                  <motion.div 
+                    whileHover={{ scale: 1.15, y: -5 }} 
+                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                    className="text-5xl md:text-6xl font-black font-heading mb-3 text-black"
+                  >
+                    {stat.value}
+                  </motion.div>
                   <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold text-gray-500">{stat.label}</div>
                 </div>
               ))}
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -99,12 +114,12 @@ function RevealText({ text, inView, delay }: { text: string, inView: boolean, de
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring" as const, damping: 12, stiffness: 100 }
+      transition: { type: "spring" as const, damping: 20, stiffness: 80 }
     },
     hidden: {
       opacity: 0,
       y: 20,
-      transition: { type: "spring" as const, damping: 12, stiffness: 100 }
+      transition: { type: "spring" as const, damping: 20, stiffness: 80 }
     }
   };
 

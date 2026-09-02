@@ -72,9 +72,12 @@ export default function Contact() {
           </h2>
 
           <div className="relative mb-6">
-            <div className="w-32 h-32 md:w-36 md:h-36 rounded-none bg-white border-4 border-black flex items-center justify-center overflow-hidden shadow-[8px_8px_0_0_#000]">
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="w-32 h-32 md:w-36 md:h-36 rounded-none bg-white border-4 border-black flex items-center justify-center overflow-hidden shadow-[8px_8px_0_0_#000]"
+            >
               <img src="/profile-sketch.jpg" alt="Profile" className="w-full h-full object-cover grayscale" />
-            </div>
+            </motion.div>
           </div>
           
           <div className="font-mono text-lg md:text-xl font-bold text-black tracking-[0.2em] uppercase">
@@ -85,9 +88,9 @@ export default function Contact() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 w-full max-w-6xl">
           {contactLinks.map((link, i) => (
             link.copyText ? (
-              <CopyCard key={i} {...link} />
+              <CopyCard key={i} index={i} {...link} />
             ) : (
-              <LinkCard key={i} {...link} />
+              <LinkCard key={i} index={i} {...link} />
             )
           ))}
         </div>
@@ -97,13 +100,18 @@ export default function Contact() {
   );
 }
 
-function LinkCard({ name, action, href, icon }: any) {
+function LinkCard({ name, action, href, icon, index }: any) {
   return (
-    <a 
+    <motion.a 
       href={href} 
       target="_blank" 
       rel="noopener noreferrer"
-      className="group flex flex-col items-center justify-center gap-6 p-8 bg-white border-2 border-black transition-all duration-300 shadow-[4px_4px_0_0_#000] hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -8, transition: { type: "spring", stiffness: 400, damping: 15, delay: 0 } }}
+      className="group flex flex-col items-center justify-center gap-6 p-8 bg-white border-2 border-black shadow-[4px_4px_0_0_#000] hover:shadow-[8px_8px_0_0_#000]"
     >
       <div>{icon}</div>
       <div className="flex flex-col items-center gap-1.5 text-center">
@@ -112,15 +120,20 @@ function LinkCard({ name, action, href, icon }: any) {
           {action}
         </span>
       </div>
-    </a>
+    </motion.a>
   );
 }
 
-function CopyCard({ name, action, copyText, redirectUrl, icon }: any) {
+function CopyCard({ name, action, copyText, redirectUrl, icon, index }: any) {
   const [copied, setCopied] = useState(false);
 
   return (
-    <button 
+    <motion.button 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -8, transition: { type: "spring", stiffness: 400, damping: 15, delay: 0 } }}
       onClick={() => {
         navigator.clipboard.writeText(copyText);
         setCopied(true);
@@ -131,7 +144,7 @@ function CopyCard({ name, action, copyText, redirectUrl, icon }: any) {
           }, 400);
         }
       }}
-      className="group flex flex-col items-center justify-center gap-6 p-8 bg-white border-2 border-black transition-all duration-300 shadow-[4px_4px_0_0_#000] hover:shadow-[8px_8px_0_0_#000] hover:-translate-y-1 cursor-pointer"
+      className="group flex flex-col items-center justify-center gap-6 p-8 bg-white border-2 border-black shadow-[4px_4px_0_0_#000] hover:shadow-[8px_8px_0_0_#000] cursor-pointer"
     >
       <div>
         {copied ? <CheckCircle2 className="w-10 h-10 text-black" /> : icon}
@@ -142,6 +155,6 @@ function CopyCard({ name, action, copyText, redirectUrl, icon }: any) {
           {copied ? "COPIED" : action}
         </span>
       </div>
-    </button>
+    </motion.button>
   );
 }
