@@ -31,11 +31,10 @@ export const personalInfo: PersonalInfo = {
   nativeLocation: 'Rajanna Sircilla, Telangana, India',
   additionalExperience: '3 Years Pharmacy Experience',
   contacts: [
-    { platform: 'Email', handle: 'sonylucky46hac@gmail.com', url: 'mailto:sonylucky46hac@gmail.com' },
-    { platform: 'WhatsApp', handle: '+91 6300464187', url: 'https://wa.me/916300464187' },
+    { platform: 'Email', handle: 'tejavoggu@outlook.com', url: 'mailto:tejavoggu@outlook.com' },
+    { platform: 'LinkedIn', handle: 'raviteja-oggu', url: 'https://www.linkedin.com/in/raviteja-oggu-56916843a/' },
     { platform: 'Discord', handle: 'karmaa_07', url: '#' },
-    { platform: 'Telegram', handle: '@xO_HaC', url: 'https://t.me/xO_HaC' },
-    { platform: 'Instagram', handle: '@zxn_wxx7', url: 'https://instagram.com/zxn_wxx7' },
+    { platform: 'Instagram', handle: '@zxn_wxx', url: 'https://instagram.com/zxn_wxx' },
     { platform: 'Twitter/X', handle: '@Karmaa_07', url: 'https://x.com/Karmaa_07' }
   ]
 };
