@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import Starfield from '@/components/visuals/Starfield';
 
 const roles = [
   "AI-Augmented Full-Stack Developer.",
@@ -77,17 +76,8 @@ export default function Hero() {
     <section 
       id="home"
       ref={containerRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#080808] text-white"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white"
     >
-      <Starfield />
-      
-      {/* Premium Subtle Gradient Glow Behind Name */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 3 }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] h-[45vh] md:w-[65vw] md:h-[55vh] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/35 via-purple-900/18 to-transparent blur-[90px] md:blur-[130px] rounded-full pointer-events-none z-0"
-      />
 
       <motion.div 
         style={{ y: y1, opacity }}
