@@ -136,43 +136,63 @@ export default function MoreWork() {
                   {project.mediaUrl && (
                     <div 
                       onClick={() => setActiveMedia(project)}
-                      className="relative w-full aspect-video bg-black/5 -mx-6 -mt-6 mb-5 overflow-hidden border-b-2 border-black cursor-pointer group/media"
+                      className="relative w-full h-56 bg-zinc-950 -mx-6 -mt-6 mb-5 overflow-hidden border-b-2 border-black cursor-pointer group/media flex items-center justify-center"
                       style={{ width: 'calc(100% + 3rem)' }}
                     >
                       {project.mediaType === 'video' ? (
                         <>
+                          {/* Ambient background blur */}
                           <video
                             src={project.mediaUrl}
                             muted
                             playsInline
                             preload="metadata"
-                            className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
+                            className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-110"
                           />
-                          <div className="absolute inset-0 bg-black/35 flex items-center justify-center group-hover/media:bg-black/20 transition-colors">
+                          {/* Centered unclipped vertical reel preview */}
+                          <div className="relative h-[90%] aspect-[9/16] shadow-xl overflow-hidden rounded-md border border-white/20 bg-black">
+                            <video
+                              src={project.mediaUrl}
+                              muted
+                              playsInline
+                              preload="metadata"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          {/* Play overlay button */}
+                          <div className="absolute inset-0 bg-black/25 flex items-center justify-center group-hover/media:bg-black/10 transition-colors">
                             <div className="w-12 h-12 rounded-full bg-white text-black border-2 border-black flex items-center justify-center shadow-[3px_3px_0_0_#000] group-hover/media:scale-110 transition-transform">
                               <Play className="w-5 h-5 fill-black ml-0.5" />
                             </div>
                           </div>
-                          <span className="absolute bottom-2 right-2 px-2 py-0.5 bg-black text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-white/20">
-                            Video Edit
+                          <span className="absolute top-2.5 right-2.5 px-2 py-0.5 bg-black/80 backdrop-blur-sm text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-white/20 rounded">
+                            Video Reel
                           </span>
                         </>
                       ) : (
                         <>
+                          {/* Ambient background blur */}
+                          <img
+                            src={project.mediaUrl}
+                            alt=""
+                            aria-hidden="true"
+                            className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-110"
+                          />
+                          {/* Centered unclipped artwork preview */}
                           <img
                             src={project.mediaUrl}
                             alt={project.title}
                             loading="lazy"
-                            className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
+                            className="relative max-h-[92%] max-w-[92%] object-contain shadow-lg group-hover/media:scale-105 transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover/media:bg-black/20 flex items-center justify-center opacity-0 group-hover/media:opacity-100 transition-all duration-300">
                             <div className="px-3 py-1.5 bg-white text-black font-mono text-[10px] font-bold uppercase tracking-wider border-2 border-black shadow-[2px_2px_0_0_#000] flex items-center gap-1.5">
                               <Eye className="w-3.5 h-3.5" />
-                              <span>View Artwork</span>
+                              <span>Inspect Artwork</span>
                             </div>
                           </div>
-                          <span className="absolute bottom-2 right-2 px-2 py-0.5 bg-black text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-white/20">
-                            Graphic
+                          <span className="absolute top-2.5 right-2.5 px-2 py-0.5 bg-black/80 backdrop-blur-sm text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-white/20 rounded">
+                            Graphic Art
                           </span>
                         </>
                       )}
@@ -321,7 +341,7 @@ export default function MoreWork() {
 
       </div>
 
-      {/* Interactive Media Lightbox Modal */}
+      {/* Cinema Darkroom Lightbox Modal */}
       <AnimatePresence>
         {activeMedia && (
           <motion.div
@@ -329,83 +349,104 @@ export default function MoreWork() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveMedia(null)}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 md:p-8 overflow-y-auto"
           >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white border-2 border-black max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-[12px_12px_0_0_#000] flex flex-col"
+            {/* Floating Top-Right Close Button */}
+            <button
+              type="button"
+              onClick={() => setActiveMedia(null)}
+              className="fixed top-5 right-5 md:top-8 md:right-8 z-[110] w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all hover:rotate-90 cursor-pointer shadow-xl"
+              aria-label="Close modal"
             >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between p-4 md:p-6 border-b-2 border-black bg-[#FAFAFA]">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-black bg-[#EAEAEA] px-2.5 py-0.5 border border-black/20">
-                      {activeMedia.category}
-                    </span>
-                    <span className="text-xs font-mono font-bold text-black/60 uppercase">
-                      {activeMedia.type}
-                    </span>
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight text-black">
-                    {activeMedia.title}
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setActiveMedia(null)}
-                  className="p-2 border-2 border-black bg-white hover:bg-black hover:text-white transition-colors cursor-pointer shadow-[2px_2px_0_0_#000]"
-                  aria-label="Close modal"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+              <X className="w-6 h-6" />
+            </button>
 
-              {/* Media Player / Canvas */}
-              <div className="p-4 md:p-6 bg-black flex items-center justify-center min-h-[300px]">
+            {/* Modal Content Box */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-6xl w-full my-auto flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12"
+            >
+              {/* Media Display Area */}
+              <div className="flex-1 flex items-center justify-center w-full min-h-[350px]">
                 {activeMedia.mediaType === 'video' ? (
-                  <video
-                    src={activeMedia.mediaUrl}
-                    controls
-                    autoPlay
-                    playsInline
-                    className="max-h-[60vh] max-w-full rounded shadow-lg"
-                  />
+                  /* Smartphone Mockup Frame for Vertical Reels */
+                  <div className="relative h-[75vh] max-h-[720px] aspect-[9/16] rounded-[2.5rem] p-3 bg-zinc-900 border-[3px] border-zinc-700 shadow-[0_0_80px_rgba(0,0,0,0.95)] flex flex-col items-center justify-center">
+                    {/* Dynamic Island Notch */}
+                    <div className="absolute top-5 z-20 w-24 h-4 bg-black rounded-full border border-zinc-800 flex items-center justify-end px-2.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500/80"></div>
+                    </div>
+                    {/* Video Player */}
+                    <div className="w-full h-full rounded-[1.8rem] overflow-hidden bg-black flex items-center justify-center">
+                      <video
+                        src={activeMedia.mediaUrl}
+                        controls
+                        autoPlay
+                        playsInline
+                        loop
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
                 ) : (
-                  <img
-                    src={activeMedia.mediaUrl}
-                    alt={activeMedia.title}
-                    className="max-h-[60vh] max-w-full object-contain rounded shadow-lg"
-                  />
+                  /* High-Resolution Artwork Showcase */
+                  <div className="relative max-h-[78vh] flex items-center justify-center">
+                    <img
+                      src={activeMedia.mediaUrl}
+                      alt={activeMedia.title}
+                      className="max-h-[75vh] max-w-full w-auto h-auto object-contain rounded-xl shadow-[0_0_60px_rgba(0,0,0,0.9)] border border-white/10"
+                    />
+                  </div>
                 )}
               </div>
 
-              {/* Modal Footer */}
-              <div className="p-4 md:p-6 border-t-2 border-black bg-white">
-                <p className="text-black/80 text-sm md:text-base leading-relaxed mb-4">
+              {/* Sleek Dark Info Sidebar */}
+              <div className="w-full lg:w-[400px] shrink-0 bg-zinc-950/90 border border-zinc-800 rounded-2xl p-6 md:p-8 backdrop-blur-xl shadow-2xl text-left">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded border border-emerald-800/60">
+                    {activeMedia.category}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider">
+                    {activeMedia.type}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white font-heading leading-tight mb-3">
+                  {activeMedia.title}
+                </h3>
+
+                <p className="text-zinc-300 text-sm leading-relaxed mb-6 font-body">
                   {activeMedia.description}
                 </p>
+
                 {activeMedia.tags && (
-                  <div className="flex flex-wrap gap-1.5 mb-4">
+                  <div className="flex flex-wrap gap-1.5 mb-6">
                     {activeMedia.tags.map((tag, i) => (
-                      <span key={i} className="text-[10px] font-mono font-medium text-black/70 bg-[#F2F2F2] px-2 py-0.5 border border-black/10">
+                      <span
+                        key={i}
+                        className="text-[10px] font-mono font-medium text-zinc-300 bg-zinc-900 px-2.5 py-1 rounded border border-zinc-800"
+                      >
                         {tag}
                       </span>
                     ))}
                   </div>
                 )}
+
                 {activeMedia.mediaUrl && (
-                  <a
-                    href={activeMedia.mediaUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 bg-black text-white px-4 py-2 font-mono font-bold text-xs uppercase tracking-wider hover:bg-black/80 transition-colors shadow-[2px_2px_0_0_#000]"
-                  >
-                    <span>Open Raw Asset</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
+                  <div className="pt-4 border-t border-zinc-800/80">
+                    <a
+                      href={activeMedia.mediaUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 w-full bg-white text-black px-4 py-3 font-mono font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-zinc-200 transition-colors shadow-lg cursor-pointer"
+                    >
+                      <span>{activeMedia.mediaType === 'video' ? 'Open Full Video' : 'View Full Image'}</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  </div>
                 )}
               </div>
             </motion.div>
