@@ -5,7 +5,7 @@ import GridBackground from '@/components/visuals/GridBackground'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tejaoggu.vercel.app'),
+  metadataBase: new URL('https://teja.is-a.dev'),
   title: 'Teja Oggu | AI-Augmented Full-Stack Developer',
   description: 'AI-Augmented Full-Stack Developer specializing in SaaS, CRM systems, AI integration, automation, APIs, and intelligent digital products.',
   openGraph: {
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Teja Oggu',
-    image: 'https://tejaoggu.vercel.app/teja-profile.jpg',
+    image: 'https://teja.is-a.dev/teja-profile.jpg',
     jobTitle: 'AI-Augmented Full-Stack Developer',
     description: 'AI-Augmented Full-Stack Developer specializing in SaaS, CRM systems, AI integration, automation, APIs, and intelligent digital products.',
     knowsAbout: ['Full-Stack Development', 'AI Integration', 'SaaS', 'CRM', 'Next.js', 'React', 'TypeScript'],

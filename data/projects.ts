@@ -20,7 +20,7 @@ export const allProjects: ProjectItem[] = [
     category: "Portfolios",
     type: "Personal Portfolio",
     description: "Personal portfolio showcasing AI full-stack development, SaaS applications, AI projects, web development, digital marketing, graphic design, and selected client projects.",
-    liveUrl: "https://tejaoggu.vercel.app/",
+    liveUrl: "https://teja.is-a.dev/",
     tags: ["Next.js", "React 19", "Tailwind CSS", "Framer Motion", "TypeScript"],
     mediaType: "web"
   },
