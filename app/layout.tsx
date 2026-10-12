@@ -5,6 +5,7 @@ import GridBackground from '@/components/visuals/GridBackground'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://tejaoggu.vercel.app'),
   title: 'Teja Oggu | AI-Augmented Full-Stack Developer',
   description: 'AI-Augmented Full-Stack Developer specializing in SaaS, CRM systems, AI integration, automation, APIs, and intelligent digital products.',
   openGraph: {
@@ -13,11 +14,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'Teja Oggu',
+    images: [{ url: '/teja-profile.jpg', width: 800, height: 800, alt: 'Teja Oggu' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Teja Oggu | AI-Augmented Full-Stack Developer',
     description: 'AI-Augmented Full-Stack Developer specializing in SaaS, CRM systems, AI integration, automation, APIs, and intelligent digital products.',
+    images: ['/teja-profile.jpg'],
   },
   robots: { index: true, follow: true },
   authors: [{ name: 'Teja Oggu' }],
@@ -29,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Teja Oggu',
+    image: 'https://tejaoggu.vercel.app/teja-profile.jpg',
     jobTitle: 'AI-Augmented Full-Stack Developer',
     description: 'AI-Augmented Full-Stack Developer specializing in SaaS, CRM systems, AI integration, automation, APIs, and intelligent digital products.',
     knowsAbout: ['Full-Stack Development', 'AI Integration', 'SaaS', 'CRM', 'Next.js', 'React', 'TypeScript'],

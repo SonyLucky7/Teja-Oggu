@@ -76,7 +76,7 @@ export default function Contact() {
               whileHover={{ scale: 1.05 }}
               className="w-32 h-32 md:w-36 md:h-36 rounded-none bg-white border-4 border-black flex items-center justify-center overflow-hidden shadow-[8px_8px_0_0_#000]"
             >
-              <img src="/profile-sketch.jpg" alt="Profile" className="w-full h-full object-cover grayscale" />
+              <img src="/teja-profile.jpg" alt="Teja Oggu" className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-300" />
             </motion.div>
           </div>
           
