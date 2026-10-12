@@ -137,62 +137,43 @@ export default function MoreWork() {
                   {project.mediaUrl && (
                     <div 
                       onClick={() => setActiveMedia(project)}
-                      className="relative w-full h-56 bg-zinc-950 -mx-6 -mt-6 mb-5 overflow-hidden border-b-2 border-black cursor-pointer group/media flex items-center justify-center"
+                      className="relative w-full h-52 -mx-6 -mt-6 mb-5 overflow-hidden border-b-2 border-black cursor-pointer group/media bg-black"
                       style={{ width: 'calc(100% + 3rem)' }}
                     >
                       {project.mediaType === 'video' ? (
                         <>
-                          {/* Ambient background blur */}
                           <video
                             src={project.mediaUrl}
                             muted
                             playsInline
                             preload="metadata"
-                            className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-110"
+                            className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
                           />
-                          {/* Centered unclipped vertical reel preview */}
-                          <div className="relative h-[90%] aspect-[9/16] shadow-xl overflow-hidden rounded-md border border-white/20 bg-black">
-                            <video
-                              src={project.mediaUrl}
-                              muted
-                              playsInline
-                              preload="metadata"
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
                           {/* Play overlay button */}
-                          <div className="absolute inset-0 bg-black/25 flex items-center justify-center group-hover/media:bg-black/10 transition-colors">
+                          <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover/media:bg-black/15 transition-colors">
                             <div className="w-12 h-12 rounded-full bg-white text-black border-2 border-black flex items-center justify-center shadow-[3px_3px_0_0_#000] group-hover/media:scale-110 transition-transform">
                               <Play className="w-5 h-5 fill-black ml-0.5" />
                             </div>
                           </div>
-                          <span className="absolute top-2.5 right-2.5 px-2 py-0.5 bg-black/80 backdrop-blur-sm text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-white/20 rounded">
+                          <span className="absolute top-3 right-3 px-2 py-0.5 bg-black text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-black shadow-[2px_2px_0_0_#fff]">
                             Video Reel
                           </span>
                         </>
                       ) : (
                         <>
-                          {/* Ambient background blur */}
-                          <img
-                            src={project.mediaUrl}
-                            alt=""
-                            aria-hidden="true"
-                            className="absolute inset-0 w-full h-full object-cover blur-md opacity-25 scale-110"
-                          />
-                          {/* Centered unclipped artwork preview */}
                           <img
                             src={project.mediaUrl}
                             alt={project.title}
                             loading="lazy"
-                            className="relative max-h-[92%] max-w-[92%] object-contain shadow-lg group-hover/media:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
                           />
-                          <div className="absolute inset-0 bg-black/0 group-hover/media:bg-black/20 flex items-center justify-center opacity-0 group-hover/media:opacity-100 transition-all duration-300">
-                            <div className="px-3 py-1.5 bg-white text-black font-mono text-[10px] font-bold uppercase tracking-wider border-2 border-black shadow-[2px_2px_0_0_#000] flex items-center gap-1.5">
+                          <div className="absolute inset-0 bg-black/0 group-hover/media:bg-black/25 flex items-center justify-center opacity-0 group-hover/media:opacity-100 transition-all duration-300">
+                            <div className="px-3 py-1.5 bg-white text-black font-mono text-[10px] font-bold uppercase tracking-wider border-2 border-black shadow-[3px_3px_0_0_#000] flex items-center gap-1.5">
                               <Eye className="w-3.5 h-3.5" />
-                              <span>Inspect Artwork</span>
+                              <span>View Full Size</span>
                             </div>
                           </div>
-                          <span className="absolute top-2.5 right-2.5 px-2 py-0.5 bg-black/80 backdrop-blur-sm text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-white/20 rounded">
+                          <span className="absolute top-3 right-3 px-2 py-0.5 bg-black text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-black shadow-[2px_2px_0_0_#fff]">
                             Graphic Art
                           </span>
                         </>
