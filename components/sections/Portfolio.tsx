@@ -60,7 +60,7 @@ export default function Portfolio() {
   const containerRef = useRef(null);
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10">
+    <section id="selected-work" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10">
       <div className="container mx-auto px-4 md:px-8 max-w-[1400px]" ref={containerRef}>
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-black/10 pb-8 overflow-hidden">

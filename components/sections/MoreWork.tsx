@@ -57,7 +57,8 @@ export default function MoreWork() {
   });
 
   return (
-    <section id="more-work" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10" ref={containerRef}>
+    <section id="portfolio" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10" ref={containerRef}>
+      <span id="more-work" className="sr-only" />
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
         
         {/* Section Header */}
