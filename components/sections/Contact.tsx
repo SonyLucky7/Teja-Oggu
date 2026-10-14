@@ -51,12 +51,12 @@ export default function Contact() {
       <div className="container mx-auto px-4 md:px-6 flex flex-col items-center">
         
         <div className="flex flex-col items-center text-center mb-16 overflow-hidden">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-12 font-heading flex gap-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter uppercase mb-10 md:mb-12 font-heading flex flex-wrap justify-center gap-3 md:gap-4">
             <motion.span
               initial={{ x: -100, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, type: "spring", bounce: 0.2 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: true }}
             >
               LET'S
             </motion.span>
@@ -64,7 +64,7 @@ export default function Contact() {
               initial={{ x: 100, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, type: "spring", bounce: 0.2, delay: 0.1 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: true }}
               className="text-black/30"
             >
               TALK

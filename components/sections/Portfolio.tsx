@@ -64,7 +64,7 @@ export default function Portfolio() {
       <div className="container mx-auto px-4 md:px-8 max-w-[1400px]" ref={containerRef}>
         
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-black/10 pb-8 overflow-hidden">
-          <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter font-heading leading-[0.9] flex flex-col">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter font-heading leading-[0.9] flex flex-col">
             <motion.span
               initial={{ x: -200, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -137,18 +137,18 @@ function ProjectCard({ project, index, total }: { project: any, index: number, t
   
   return (
     <div 
-      className="sticky top-28 mb-12 md:mb-24 flex items-center justify-center w-full"
-      style={{ zIndex: index, top: `calc(90px + ${index * 32}px)` }}
+      className="relative lg:sticky mb-12 md:mb-16 lg:mb-24 flex items-center justify-center w-full"
+      style={{ zIndex: index }}
     >
       <motion.div 
         ref={cardRef}
-        style={{ scale, opacity, rotateX, rotateY, transformPerspective: 1200 }}
+        style={{ scale, opacity }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className="w-full relative"
       >
         <div 
-          className="w-full border-2 border-black bg-[#EBEBEB] flex flex-col justify-between p-6 md:p-10 shadow-[8px_8px_0_0_#000] hover:shadow-[16px_16px_0_0_#000] transition-shadow duration-300 group"
+          className="w-full border-2 border-black bg-[#EBEBEB] flex flex-col justify-between p-6 sm:p-8 md:p-10 shadow-[6px_6px_0_0_#000] md:shadow-[8px_8px_0_0_#000] hover:shadow-[14px_14px_0_0_#000] transition-shadow duration-300 group"
         >
           <div className="flex flex-col md:flex-row md:items-start justify-between border-b border-black/20 pb-6 gap-4">
             <div>

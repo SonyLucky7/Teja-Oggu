@@ -25,6 +25,16 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   authors: [{ name: 'Teja Oggu' }],
   keywords: ['Full-Stack Developer', 'AI Developer', 'SaaS', 'CRM', 'Next.js', 'React', 'TypeScript'],
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -43,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body className="bg-background text-foreground font-body min-h-screen noise">
+      <body className="bg-background text-foreground font-body min-h-screen overflow-x-hidden">
         <GridBackground />
         <ScrollProgress />
         {children}

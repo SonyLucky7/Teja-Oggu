@@ -35,30 +35,30 @@ export default function TechStack() {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10">
-      <div className="container mx-auto px-4 md:px-8 max-w-6xl" ref={containerRef}>
+    <section className="py-20 md:py-28 lg:py-32 bg-[#F9F9F9] text-black border-b border-black/10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-6xl" ref={containerRef}>
         
-        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-16 font-heading flex gap-4 overflow-hidden">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter mb-12 md:mb-16 font-heading flex flex-wrap gap-3 md:gap-4 overflow-hidden">
           <motion.span
-            initial={{ x: -200, opacity: 0 }}
+            initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            viewport={{ once: false, margin: "-100px" }}
+            viewport={{ once: true }}
           >
             TECHNICAL
           </motion.span>
           <motion.span
-            initial={{ x: 200, opacity: 0 }}
+            initial={{ x: 100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.1 }}
-            viewport={{ once: false, margin: "-100px" }}
+            viewport={{ once: true }}
             className="text-black/30"
           >
             ARSENAL
           </motion.span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-x-16 md:gap-y-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-12 md:gap-y-16">
           {skills.map((skillGroup, index) => (
             <motion.div 
               key={index}

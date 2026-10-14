@@ -28,6 +28,56 @@ const inDevelopment = [
   }
 ];
 
+function VideoCardMedia({ src }: { src: string }) {
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="w-full h-full bg-zinc-950 flex items-center justify-center relative">
+      {isInView && (
+        <video
+          ref={videoRef}
+          src={src}
+          muted
+          playsInline
+          preload="none"
+          className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
+          onMouseEnter={() => videoRef.current?.play().catch(() => {})}
+          onMouseLeave={() => {
+            if (videoRef.current) {
+              videoRef.current.pause();
+              videoRef.current.currentTime = 0;
+            }
+          }}
+        />
+      )}
+      <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover/media:bg-black/15 transition-colors">
+        <div className="w-12 h-12 rounded-full bg-white text-black border-2 border-black flex items-center justify-center shadow-[3px_3px_0_0_#000] group-hover/media:scale-110 transition-transform">
+          <Play className="w-5 h-5 fill-black ml-0.5" />
+        </div>
+      </div>
+      <span className="absolute top-3 right-3 px-2 py-0.5 bg-black text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-black shadow-[2px_2px_0_0_#fff]">
+        Video Reel
+      </span>
+    </div>
+  );
+}
+
 export default function MoreWork() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.05 });
@@ -57,9 +107,9 @@ export default function MoreWork() {
   });
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-[#F9F9F9] text-black border-b border-black/10" ref={containerRef}>
+    <section id="portfolio" className="py-20 md:py-28 lg:py-32 bg-[#F9F9F9] text-black border-b border-black/10" ref={containerRef}>
       <span id="more-work" className="sr-only" />
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/10 pb-8 mb-12">
@@ -68,7 +118,7 @@ export default function MoreWork() {
               <Layers className="w-3.5 h-3.5" />
               <span>Full Production Catalog</span>
             </div>
-            <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter font-heading">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter font-heading leading-tight">
               Project <span className="text-black/30">Archive</span>
             </h2>
           </div>
@@ -78,7 +128,7 @@ export default function MoreWork() {
         </div>
 
         {/* Filter Tabs & Search Bar */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-12">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-10">
           {/* Category Tabs */}
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => {
@@ -88,9 +138,9 @@ export default function MoreWork() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-2 border-2 border-black ${
+                  className={`px-3.5 py-1.5 md:px-4 md:py-2 font-mono text-[11px] md:text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-2 border-2 border-black ${
                     isActive 
-                      ? "bg-black text-white shadow-[4px_4px_0_0_#000]" 
+                      ? "bg-black text-white shadow-[3px_3px_0_0_#000] md:shadow-[4px_4px_0_0_#000]" 
                       : "bg-white text-black hover:bg-black/5 shadow-[2px_2px_0_0_#000]"
                   }`}
                 >
@@ -117,48 +167,26 @@ export default function MoreWork() {
         </div>
 
         {/* Projects Grid */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           <AnimatePresence>
             {filteredProjects.map((project, index) => (
               <motion.div
-                layout
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.35, delay: Math.min(index * 0.03, 0.3) }}
+                transition={{ duration: 0.25, delay: Math.min(index * 0.02, 0.2) }}
                 key={project.id}
-                className="bg-white border-2 border-black p-6 flex flex-col justify-between shadow-[6px_6px_0_0_#000] hover:shadow-[10px_10px_0_0_#000] hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
+                className="bg-white border-2 border-black flex flex-col justify-between shadow-[5px_5px_0_0_#000] md:shadow-[6px_6px_0_0_#000] hover:shadow-[10px_10px_0_0_#000] hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
               >
                 <div>
                   {/* Media Preview (For Video & Graphics) */}
                   {project.mediaUrl && (
                     <div 
                       onClick={() => setActiveMedia(project)}
-                      className="relative w-full h-52 -mx-6 -mt-6 mb-5 overflow-hidden border-b-2 border-black cursor-pointer group/media bg-black"
-                      style={{ width: 'calc(100% + 3rem)' }}
+                      className="relative w-full h-52 overflow-hidden border-b-2 border-black cursor-pointer group/media bg-black"
                     >
                       {project.mediaType === 'video' ? (
-                        <>
-                          <video
-                            src={project.mediaUrl}
-                            muted
-                            playsInline
-                            preload="metadata"
-                            className="w-full h-full object-cover group-hover/media:scale-105 transition-transform duration-500"
-                          />
-                          {/* Play overlay button */}
-                          <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover/media:bg-black/15 transition-colors">
-                            <div className="w-12 h-12 rounded-full bg-white text-black border-2 border-black flex items-center justify-center shadow-[3px_3px_0_0_#000] group-hover/media:scale-110 transition-transform">
-                              <Play className="w-5 h-5 fill-black ml-0.5" />
-                            </div>
-                          </div>
-                          <span className="absolute top-3 right-3 px-2 py-0.5 bg-black text-white text-[10px] font-mono font-bold tracking-wider uppercase border border-black shadow-[2px_2px_0_0_#fff]">
-                            Video Reel
-                          </span>
-                        </>
+                        <VideoCardMedia src={project.mediaUrl} />
                       ) : (
                         <>
                           <img
@@ -181,31 +209,33 @@ export default function MoreWork() {
                     </div>
                   )}
 
-                  {/* Card Header: Category & Number */}
-                  <div className="flex items-center justify-between border-b border-black/10 pb-4 mb-4">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-black bg-[#EAEAEA] px-2.5 py-1 border border-black/20">
-                      {project.category}
-                    </span>
-                    <span className="font-mono text-xs font-bold text-black/40">
-                      #{String(allProjects.findIndex(p => p.id === project.id) + 1).padStart(2, '0')}
-                    </span>
+                  <div className="p-5 md:p-6 pb-0">
+                    {/* Card Header: Category & Number */}
+                    <div className="flex items-center justify-between border-b border-black/10 pb-4 mb-4">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-black bg-[#EAEAEA] px-2.5 py-1 border border-black/20">
+                        {project.category}
+                      </span>
+                      <span className="font-mono text-xs font-bold text-black/40">
+                        #{String(allProjects.findIndex(p => p.id === project.id) + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                    {/* Title & Subtitle */}
+                    <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight text-black group-hover:text-[#3B82F6] transition-colors mb-1.5">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs font-mono font-bold text-black/60 uppercase tracking-wider mb-4">
+                      {project.type}
+                    </p>
+
+                    {/* Description */}
+                    <p className="text-black/75 text-sm leading-relaxed mb-6 font-body">
+                      {project.description}
+                    </p>
                   </div>
-
-                  {/* Title & Subtitle */}
-                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight text-black group-hover:text-[#3B82F6] transition-colors mb-1.5">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs font-mono font-bold text-black/60 uppercase tracking-wider mb-4">
-                    {project.type}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-black/75 text-sm leading-relaxed mb-6 font-body">
-                    {project.description}
-                  </p>
                 </div>
 
-                <div>
+                <div className="p-5 md:p-6 pt-0">
                   {/* Tags */}
                   {project.tags && (
                     <div className="flex flex-wrap gap-1.5 mb-5 pt-3 border-t border-black/10">
@@ -270,7 +300,7 @@ export default function MoreWork() {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
         {filteredProjects.length === 0 && (
           <div className="text-center py-16 bg-white border-2 border-black shadow-[4px_4px_0_0_#000]">

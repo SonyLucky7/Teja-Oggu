@@ -38,13 +38,13 @@ export default function Navbar() {
           <span className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">OGGU</span>
         </a>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Desktop / Tablet Nav */}
+        <nav className="hidden md:flex items-center gap-5 lg:gap-8">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href}
-              className="relative text-sm font-bold tracking-widest uppercase text-black/70 hover:text-black transition-colors duration-300 group py-1"
+              className="relative text-xs lg:text-sm font-bold tracking-widest uppercase text-black/70 hover:text-black transition-colors duration-300 group py-1"
             >
               {link.name}
               <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black group-hover:w-full transition-all duration-300 ease-out" />
@@ -52,8 +52,8 @@ export default function Navbar() {
           ))}
           <motion.a 
             href="#contact" 
-            className="bg-black text-white px-6 py-2.5 text-sm font-bold uppercase tracking-widest"
-            whileHover={{ y: -2, boxShadow: "0 4px 12px rgba(0,0,0,0.3)" }}
+            className="bg-black text-white px-4 lg:px-6 py-2 lg:py-2.5 text-xs lg:text-sm font-bold uppercase tracking-widest shadow-[2px_2px_0_0_#000]"
+            whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >

@@ -14,27 +14,27 @@ export default function About() {
   const statsY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   return (
-    <section id="about" className="py-24 md:py-32 border-b border-black/10 bg-[#F9F9F9] text-black">
-      <div className="container mx-auto px-4 md:px-8" ref={containerRef}>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+    <section id="about" className="py-20 md:py-28 lg:py-32 border-b border-black/10 bg-[#F9F9F9] text-black">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 max-w-7xl" ref={containerRef}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
           
           {/* Header */}
-          <div className="md:col-span-4">
-            <h2 className="text-7xl md:text-[100px] leading-[0.9] font-black uppercase tracking-tighter font-heading sticky top-32 overflow-hidden">
+          <div className="lg:col-span-4">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl leading-[0.9] font-black uppercase tracking-tighter font-heading lg:sticky lg:top-32">
               <motion.span 
-                initial={{ x: -200, opacity: 0 }}
+                initial={{ x: -100, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                viewport={{ once: false, margin: "-100px" }}
+                viewport={{ once: true }}
                 className="text-black block"
               >
                 THE
               </motion.span>
               <motion.span 
-                initial={{ x: 200, opacity: 0 }}
+                initial={{ x: 100, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.1 }}
-                viewport={{ once: false, margin: "-100px" }}
+                viewport={{ once: true }}
                 className="text-[#B3B3B3] block"
               >
                 MINDSET
@@ -43,7 +43,7 @@ export default function About() {
           </div>
 
           {/* Content */}
-          <div className="md:col-span-8 flex flex-col gap-16 mt-4 md:mt-0">
+          <div className="lg:col-span-8 flex flex-col gap-12 lg:gap-16">
             
             <div className="text-2xl md:text-4xl leading-snug font-bold font-body text-black">
               <RevealText text="I bridge the gap between complex engineering and rapid execution." inView={isInView} delay={0} />
@@ -69,8 +69,7 @@ export default function About() {
             </div>
 
             {/* Stats Grid */}
-            <motion.div 
-              style={{ y: statsY }}
+            <div 
               className="grid grid-cols-2 md:grid-cols-4 border-y border-black/10 divide-x divide-y md:divide-y-0 divide-black/10 mt-4"
             >
               {[
@@ -90,7 +89,7 @@ export default function About() {
                   <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold text-gray-500">{stat.label}</div>
                 </div>
               ))}
-            </motion.div>
+            </div>
 
           </div>
         </div>
