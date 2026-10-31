@@ -13,7 +13,18 @@ export interface ProjectItem {
 }
 
 export const allProjects: ProjectItem[] = [
-  // ── 21 Flagship Websites ───────────────────────────────────────────────────
+  // ── 22 Flagship Platforms & Apps ──────────────────────────────────────────
+  {
+    id: "melody",
+    title: "Melody",
+    category: "SaaS & AI",
+    type: "Spotify-Scale Cross-Platform Music Streaming Ecosystem",
+    description: "Production-grade audio streaming platform engineered for $0/mo cloud audio storage hosting 552+ lossless 320kbps tracks (~5 GB). Built with 0.2ms HTTP HEAD fast-path metadata routing, dual-slot chain pre-buffering (<100ms latency), and multi-platform playback across Android Mobile, Google TV / Android TV (10-Foot D-Pad UI), and Web.",
+    liveUrl: "https://melody-chi-nine.vercel.app/",
+    githubUrl: "https://github.com/SonyLucky7/melody",
+    tags: ["Kotlin", "Jetpack Compose", "Android TV (D-Pad)", "React 18", "Node.js", "PostgreSQL", "Telegram CDN Pool", "GitHub Actions CI/CD"],
+    mediaType: "web"
+  },
   {
     id: "teja-oggu",
     title: "Teja Oggu",

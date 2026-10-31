@@ -19,8 +19,8 @@ export default function Home() {
           <Marquee />
           <About />
           <TechStack />
-          <MoreWork />
           <Portfolio />
+          <MoreWork />
           <Journey />
           <Contact />
         </main>
