@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   ArrowUpRight, 
   Download, 
@@ -15,9 +15,20 @@ import {
   Layers, 
   Database,
   Radio,
-  ExternalLink
+  ExternalLink,
+  LineChart,
+  Monitor,
+  Repeat,
+  Cpu
 } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/SocialIcons';
+
+interface PreviewView {
+  id: string;
+  label: string;
+  src: string;
+  caption: string;
+}
 
 interface FlagshipProject {
   id: string;
@@ -32,13 +43,11 @@ interface FlagshipProject {
   keyMetrics: { label: string; value: string; detail: string }[];
   coreStrategies: { title: string; desc: string; tag: string }[];
   services: string[];
-  link: string;
-  apkUrl: string;
-  github: string;
-  images: {
-    web: string;
-    tv: string;
-  };
+  link?: string;
+  linkText?: string;
+  apkUrl?: string;
+  github?: string;
+  views: PreviewView[];
 }
 
 const flagshipProjects: FlagshipProject[] = [
@@ -101,12 +110,102 @@ const flagshipProjects: FlagshipProject[] = [
       "IndexedDB Offline"
     ],
     link: "https://melody-chi-nine.vercel.app",
+    linkText: "Live Web Player",
     apkUrl: "https://melody-chi-nine.vercel.app/Melody-v1.0.8.apk",
     github: "https://github.com/SonyLucky7/melody",
-    images: {
-      web: "/melody-preview.png",
-      tv: "/melody-tv-preview.jpg"
-    }
+    views: [
+      {
+        id: "web",
+        label: "Web Player",
+        src: "/melody-preview.png",
+        caption: "Live Desktop & Mobile Web Player • 6-Band Equalizer & Instant 0ms Cold Start"
+      },
+      {
+        id: "tv",
+        label: "Google TV (10-Foot UI)",
+        src: "/melody-tv-preview.jpg",
+        caption: "Android TV & Google TV 10-Foot Living Room Interface with D-Pad Remote Focus Engine"
+      }
+    ]
+  },
+  {
+    id: "chartread",
+    number: "02",
+    title: "ChartRead",
+    tagline: "High-Performance Electron Market Charting Platform with Multi-Timeframe Bar Replay",
+    badge: "TradingView-Grade Workstation • Custom Replay Engine • 60 FPS WebGL",
+    client: "Desktop Systems Engineering & Quantitative Finance",
+    quote: "Inspired by TradingView, I built ChartRead to unlock institutional-grade charting capabilities on desktop — featuring a custom multi-timeframe Bar Replay backtesting engine, multi-chart tiling, and zero-latency WebSocket feeds without subscription paywalls.",
+    description: "An enterprise-grade desktop financial analysis and charting workstation built on Electron, Node.js, and Chromium. Designed for active traders and quantitative analysts, ChartRead delivers institutional-level charting capabilities—including real-time multi-asset market data streaming, unlimited technical indicators, multi-chart window tiling, and an engineered client-side Bar Replay Backtesting Engine supporting synchronized historical scrubbing across all timeframes (seconds, intraday minutes, hours, and daily intervals) without subscription paywalls.",
+    platforms: [
+      { name: "Electron Desktop (Windows & macOS)", icon: "desktop" },
+      { name: "Hardware-Accelerated WebGL / Canvas", icon: "zap" },
+      { name: "Real-Time WebSocket Streamers", icon: "network" }
+    ],
+    keyMetrics: [
+      { label: "Rendering Engine", value: "60 FPS", detail: "Hardware-Accelerated Canvas/WebGL Pipeline" },
+      { label: "Bar Replay Engine", value: "Multi-TF", detail: "Seconds, 1m, 5m, 1h, 1D with Timestamp Clamping" },
+      { label: "Paywall Restrictions", value: "$0 Cost", detail: "Unlocked Multi-Charts, Replay & Indicators" },
+      { label: "Data Stream Latency", value: "Zero-Lag", detail: "WebSocket Binary & JSON Real-Time Feeds" },
+      { label: "Architecture", value: "Electron", detail: "Multi-Process Main, Preload & Renderer" },
+      { label: "E2E Testing", value: "CDP E2E", detail: "Headless Chrome DevTools Protocol Suite" }
+    ],
+    coreStrategies: [
+      {
+        tag: "Bar Replay Engine",
+        title: "Multi-Timeframe Historical Replay (Engineered from Scratch)",
+        desc: "Architected a client-side bar replay state machine with microsecond timestamp anchoring (clampBarsToCutoff). Intercepts module updates on resolution change (e.g. 15m to 1m), slices series buffers, and dynamically recalculates indicators (RSI, Volume, MACD) strictly up to visible historical bars."
+      },
+      {
+        tag: "Metaprogramming",
+        title: "Runtime Webpack Interception & Prototype Patching",
+        desc: "Injected platform-preload.js into Chromium's renderer thread prior to DOM evaluation. Hooked __webpack_require__ to wrap Session, Series, and Replay modules—neutralizing commercial licensing gates, telemetries, and paywall validation classes at runtime."
+      },
+      {
+        tag: "Canvas Performance",
+        title: "High-Throughput Canvas & TimeScale Synchronization",
+        desc: "Maintains 60 FPS scrolling and zooming across complex multi-chart layouts with hundreds of thousands of historical candle vectors by managing time-scale base indices and routing partial state modifications through lightUpdate."
+      },
+      {
+        tag: "Brand Re-Engineering",
+        title: "Complete White-Label Brand & UI Re-Engineering",
+        desc: "Completely stripped embedded third-party watermarks, promotional banners, and proprietary assets. Replaced raster assets with scalable SVGs and patched UI template bundles, menus, and localization dictionaries (en.json)."
+      }
+    ],
+    services: [
+      "Electron",
+      "Node.js",
+      "Chromium",
+      "WebGL",
+      "HTML5 Canvas 2D",
+      "WebSockets",
+      "JavaScript ES2023+",
+      "Webpack Hook Interception",
+      "Prototype Metaprogramming",
+      "Chrome DevTools Protocol (CDP)",
+      "Electron Builder"
+    ],
+    github: "https://github.com/SonyLucky7/ChartRead",
+    views: [
+      {
+        id: "station",
+        label: "Pro Workstation",
+        src: "/chartread-preview.png",
+        caption: "TradingView-Grade Desktop Workstation • Unlocked Pro Studies & Real-Time Multi-Asset Feeds"
+      },
+      {
+        id: "replay",
+        label: "Bar Replay Engine",
+        src: "/chartread-replay-preview.png",
+        caption: "Client-Side Historical Bar Replay Simulation Engine with Synchronized Study Recalculation"
+      },
+      {
+        id: "multichart",
+        label: "Multi-Chart Tiling",
+        src: "/chartread-multichart-preview.png",
+        caption: "Multi-Window Chart Tiling & Synchronized Multi-Timeframe Market Analysis"
+      }
+    ]
   }
 ];
 
@@ -153,12 +252,12 @@ export default function Portfolio() {
             viewport={{ once: true }}
             className="md:w-1/3 text-base md:text-lg font-bold text-black/80 leading-relaxed font-body"
           >
-            Production-scale systems, high-concurrency cross-platform architectures, and Spotify-range media engines engineered for real-world reliability.
+            Production-scale systems, high-concurrency cross-platform architectures, and TradingView & Spotify-caliber platforms engineered for real-world reliability.
           </motion.div>
         </div>
 
         {/* Flagship Projects Showcase */}
-        <div className="mt-16 md:mt-24 relative">
+        <div className="mt-16 md:mt-24 flex flex-col gap-16 md:gap-24 relative">
           {flagshipProjects.map((project, index) => (
             <FlagshipProjectCard key={project.id} project={project} index={index} total={flagshipProjects.length} />
           ))}
@@ -171,19 +270,21 @@ export default function Portfolio() {
 
 function FlagshipProjectCard({ project, index, total }: { project: FlagshipProject, index: number, total: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [activeView, setActiveView] = useState<'web' | 'tv'>('web');
+  const [activeViewIndex, setActiveViewIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["start end", "start start"]
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.88, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
+  const currentView = project.views[activeViewIndex] || project.views[0];
 
   return (
     <div 
-      className="relative mb-12 md:mb-16 lg:mb-24 flex items-center justify-center w-full"
+      className="relative flex items-center justify-center w-full"
       style={{ zIndex: index }}
     >
       <motion.div 
@@ -218,37 +319,43 @@ function FlagshipProjectCard({ project, index, total }: { project: FlagshipProje
 
             {/* Top Action CTAs */}
             <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-black text-white px-5 py-3 font-mono font-bold text-xs uppercase tracking-wider hover:bg-black/80 transition-all shadow-[3px_3px_0_0_#000] hover:translate-x-0.5 hover:translate-y-0.5"
-              >
-                <span>Live Web Player</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-black text-white px-5 py-3 font-mono font-bold text-xs uppercase tracking-wider hover:bg-black/80 transition-all shadow-[3px_3px_0_0_#000] hover:translate-x-0.5 hover:translate-y-0.5"
+                >
+                  <span>{project.linkText || "Live Web Player"}</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              )}
 
-              <a
-                href={project.apkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white text-black px-4 py-3 font-mono font-bold text-xs uppercase tracking-wider border-2 border-black hover:bg-black/5 transition-all shadow-[3px_3px_0_0_#000]"
-                title="Download Melody Android APK (v1.0.8)"
-              >
-                <Download className="w-4 h-4" />
-                <span>Download APK (v1.0.8)</span>
-              </a>
+              {project.apkUrl && (
+                <a
+                  href={project.apkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-white text-black px-4 py-3 font-mono font-bold text-xs uppercase tracking-wider border-2 border-black hover:bg-black/5 transition-all shadow-[3px_3px_0_0_#000]"
+                  title="Download Melody Android APK (v1.0.8)"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Download APK (v1.0.8)</span>
+                </a>
+              )}
 
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white text-black px-4 py-3 font-mono font-bold text-xs uppercase tracking-wider border-2 border-black hover:bg-black/5 transition-all shadow-[3px_3px_0_0_#000]"
-                title="View Source on GitHub"
-              >
-                <GithubIcon className="w-4 h-4 fill-black" />
-                <span>GitHub</span>
-              </a>
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-white text-black px-4 py-3 font-mono font-bold text-xs uppercase tracking-wider border-2 border-black hover:bg-black/5 transition-all shadow-[3px_3px_0_0_#000]"
+                  title="View Source on GitHub"
+                >
+                  <GithubIcon className="w-4 h-4 fill-black" />
+                  <span>GitHub</span>
+                </a>
+              )}
             </div>
           </div>
 
@@ -262,82 +369,75 @@ function FlagshipProjectCard({ project, index, total }: { project: FlagshipProje
                 {project.quote}
               </p>
               <div className="flex flex-wrap items-center gap-4 mt-2 pt-2 border-t border-black/10 text-xs font-mono text-black/60">
-                <span className="flex items-center gap-1.5">
-                  <Smartphone className="w-3.5 h-3.5 text-black" /> Android Mobile
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Tv className="w-3.5 h-3.5 text-black" /> Google TV / Android TV (10-Foot UI)
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Globe className="w-3.5 h-3.5 text-black" /> React Web Player
-                </span>
+                {project.platforms.map((p, i) => (
+                  <span key={i} className="flex items-center gap-1.5">
+                    {p.icon === 'mobile' && <Smartphone className="w-3.5 h-3.5 text-black" />}
+                    {p.icon === 'tv' && <Tv className="w-3.5 h-3.5 text-black" />}
+                    {p.icon === 'web' && <Globe className="w-3.5 h-3.5 text-black" />}
+                    {p.icon === 'desktop' && <Monitor className="w-3.5 h-3.5 text-black" />}
+                    {p.icon === 'zap' && <Zap className="w-3.5 h-3.5 text-black" />}
+                    {p.icon === 'network' && <Radio className="w-3.5 h-3.5 text-black" />}
+                    <span>{p.name}</span>
+                  </span>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Interactive Screen Preview with Platform Tabs */}
+          {/* Interactive Screen Preview with Platform/Mode Tabs */}
           <div className="w-full relative my-4">
             {/* View Mode Toggle Switcher */}
             <div className="flex items-center justify-between flex-wrap gap-3 mb-3">
               <span className="text-xs font-mono font-bold uppercase tracking-widest text-black/60 flex items-center gap-2">
                 <Radio className="w-3.5 h-3.5 text-black animate-pulse" />
-                <span>Interactive Platform Preview:</span>
+                <span>Interactive Workstation Views:</span>
               </span>
 
               <div className="inline-flex items-center gap-1 bg-white border-2 border-black p-1 shadow-[2px_2px_0_0_#000]">
-                <button
-                  type="button"
-                  onClick={() => setActiveView('web')}
-                  className={`px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
-                    activeView === 'web'
-                      ? 'bg-black text-white shadow-[2px_2px_0_0_#000]'
-                      : 'text-black hover:bg-black/5'
-                  }`}
-                >
-                  <Globe className="w-3.5 h-3.5" />
-                  <span>Web Player</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveView('tv')}
-                  className={`px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
-                    activeView === 'tv'
-                      ? 'bg-black text-white shadow-[2px_2px_0_0_#000]'
-                      : 'text-black hover:bg-black/5'
-                  }`}
-                >
-                  <Tv className="w-3.5 h-3.5" />
-                  <span>Google TV (10-Foot UI)</span>
-                </button>
+                {project.views.map((v, i) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    onClick={() => setActiveViewIndex(i)}
+                    className={`px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                      activeViewIndex === i
+                        ? 'bg-black text-white shadow-[2px_2px_0_0_#000]'
+                        : 'text-black hover:bg-black/5'
+                    }`}
+                  >
+                    <span>{v.label}</span>
+                  </button>
+                ))}
               </div>
             </div>
 
             {/* Main Preview Screen */}
-            <a 
-              href={project.link}
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="relative w-full block border-2 border-black overflow-hidden group/img cursor-pointer bg-black min-h-[320px] sm:min-h-[440px] md:min-h-[540px] shadow-[6px_6px_0_0_#000]"
-            >
+            <div className="relative w-full block border-2 border-black overflow-hidden group/img bg-black min-h-[320px] sm:min-h-[440px] md:min-h-[540px] shadow-[6px_6px_0_0_#000]">
               <img 
-                src={activeView === 'web' ? project.images.web : project.images.tv} 
-                alt={`${project.title} - ${activeView === 'web' ? 'Web Player' : 'Google TV Experience'}`} 
+                src={currentView.src} 
+                alt={`${project.title} - ${currentView.label}`} 
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-102"
               />
               
-              {/* Overlay hover badge */}
-              <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                <span className="bg-black text-white border-2 border-white px-6 py-3 font-bold uppercase tracking-widest text-xs opacity-0 group-hover/img:opacity-100 transform translate-y-3 group-hover/img:translate-y-0 transition-all duration-300 shadow-[4px_4px_0_0_#fff] flex items-center gap-2">
-                  <span>Open Live Player ({activeView === 'web' ? 'Web' : '4K TV View'}) ↗</span>
-                </span>
-              </div>
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 bg-black/0 group-hover/img:bg-black/30 transition-colors duration-300 flex items-center justify-center cursor-pointer"
+                >
+                  <span className="bg-black text-white border-2 border-white px-6 py-3 font-bold uppercase tracking-widest text-xs opacity-0 group-hover/img:opacity-100 transform translate-y-3 group-hover/img:translate-y-0 transition-all duration-300 shadow-[4px_4px_0_0_#fff] flex items-center gap-2">
+                    <span>Explore {project.title} ↗</span>
+                  </span>
+                </a>
+              )}
 
               {/* Bottom Screen Label */}
-              <div className="absolute bottom-3 left-3 bg-black/90 backdrop-blur-md text-white border border-white/20 px-3 py-1 text-[11px] font-mono uppercase tracking-wider flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span>{activeView === 'web' ? 'Live Desktop & Mobile Web Player' : 'Android TV & Google TV 10-Foot Living Room Interface'}</span>
+              <div className="absolute bottom-3 left-3 right-3 sm:right-auto bg-black/90 backdrop-blur-md text-white border border-white/20 px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+                <span className="truncate">{currentView.caption}</span>
               </div>
-            </a>
+            </div>
           </div>
 
           {/* Key Engineering Metrics Grid */}
@@ -374,7 +474,7 @@ function FlagshipProjectCard({ project, index, total }: { project: FlagshipProje
             <div className="flex items-center gap-2 mb-5">
               <Server className="w-4 h-4 text-black" />
               <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-black">
-                Core Distributed Systems Breakthroughs:
+                Core Distributed & System Engineering Breakthroughs:
               </h4>
             </div>
 
@@ -419,25 +519,45 @@ function FlagshipProjectCard({ project, index, total }: { project: FlagshipProje
             </div>
             
             <div className="flex items-center gap-3 shrink-0">
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-blue-600 underline underline-offset-4"
-              >
-                <span>Launch Web Player</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-              <span className="text-black/30">•</span>
-              <a
-                href={project.apkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-blue-600 underline underline-offset-4"
-              >
-                <span>Download APK</span>
-                <Download className="w-3.5 h-3.5" />
-              </a>
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-blue-600 underline underline-offset-4"
+                >
+                  <span>{project.linkText || "Launch Web Player"}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {project.apkUrl && (
+                <>
+                  <span className="text-black/30">•</span>
+                  <a
+                    href={project.apkUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-blue-600 underline underline-offset-4"
+                  >
+                    <span>Download APK</span>
+                    <Download className="w-3.5 h-3.5" />
+                  </a>
+                </>
+              )}
+              {project.github && (
+                <>
+                  <span className="text-black/30">•</span>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-blue-600 underline underline-offset-4"
+                  >
+                    <span>GitHub Code</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </>
+              )}
             </div>
           </div>
 

@@ -26,6 +26,16 @@ export const allProjects: ProjectItem[] = [
     mediaType: "web"
   },
   {
+    id: "chartread",
+    title: "ChartRead",
+    category: "SaaS & AI",
+    type: "TradingView-Grade Desktop Charting & Multi-Timeframe Replay Workstation",
+    description: "Enterprise-grade desktop financial market charting workstation built on Electron, WebGL, and Canvas. Features a custom client-side Bar Replay backtesting engine with microsecond timestamp anchoring (clampBarsToCutoff), synchronized indicator recalculation across seconds, intraday, and daily intervals, multi-chart tiling, and zero-latency WebSocket feeds without paywalls.",
+    githubUrl: "https://github.com/SonyLucky7/ChartRead",
+    tags: ["Electron", "Node.js", "WebGL", "HTML5 Canvas", "WebSockets", "Webpack Interception", "Prototype Metaprogramming", "Chrome DevTools Protocol (CDP)"],
+    mediaType: "web"
+  },
+  {
     id: "teja-oggu",
     title: "Teja Oggu",
     category: "Portfolios",
